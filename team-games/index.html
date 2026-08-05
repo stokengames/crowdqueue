@@ -4,22 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Team Games | Stoken Games</title>
-<meta name="description" content="Custom games that turn teams into teammates. Your team as a trading card game, from $7,500.">
+<meta name="description" content="Every person on your team becomes a trading card. Then you play. Fixed price, from $7,500.">
 <link rel="canonical" href="https://stoken.games/team-games/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Stoken Games">
 <meta property="og:title" content="Team Games | Stoken Games">
-<meta property="og:description" content="Custom games that turn teams into teammates. Your team as a trading card game, from $7,500.">
+<meta property="og:description" content="Every person on your team becomes a trading card. Then you play. Fixed price, from $7,500.">
 <meta property="og:url" content="https://stoken.games/team-games/">
-<meta property="og:image" content="https://stoken.games/images/teamgames-card-fan.jpg">
+<meta property="og:image" content="https://stoken.games/images/teamgames-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Team Games | Stoken Games">
-<meta name="twitter:description" content="Custom games that turn teams into teammates. Your team as a trading card game, from $7,500.">
-<meta name="twitter:image" content="https://stoken.games/images/teamgames-card-fan.jpg">
+<meta name="twitter:description" content="Every person on your team becomes a trading card. Then you play. Fixed price, from $7,500.">
+<meta name="twitter:image" content="https://stoken.games/images/teamgames-og.png">
 
 <link rel="icon" type="image/png" href="/images/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,18 +34,19 @@
   :root {
     --bg: #0a0a0a;
     --surface-raised: #141414;
-    --surface-container-low: #191b24;
+    --surface-container-low: #16181f;
     --surface-container: #1d1f28;
-    --surface-container-highest: #32343e;
-    --on-surface: #e1e2ee;
+    --on-surface: #e6e7ef;
     --on-surface-variant: #c2c6d8;
     --text-primary: #ffffff;
     --stoken-blue: #00E5FF;
     --stoken-silver: #c9c6c5;
-    --gutter: 32px;
-    --container-max: 1120px;
+    --hairline: rgba(255,255,255,0.10);
     --font-display: 'Barlow Condensed', system-ui, sans-serif;
     --font-body: 'Nunito', system-ui, sans-serif;
+    --content-max: 1080px;
+    --prose-max: 68ch;
+    --section-pad: clamp(4rem, 10vw, 8rem);
   }
 
   html { scroll-behavior: smooth; }
@@ -52,8 +55,8 @@
     background: var(--bg);
     color: var(--on-surface);
     font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 1.0625rem;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
@@ -70,177 +73,201 @@
     -webkit-font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased;
   }
 
-  /* Type tokens (from the main site) */
-  .t-display {
-    font-family: var(--font-display);
-    font-size: clamp(48px, 8vw, 88px);
-    font-weight: 800; line-height: 1.0; letter-spacing: -0.02em; text-transform: uppercase;
-  }
-  .t-h1 {
-    font-family: var(--font-display);
-    font-size: clamp(36px, 6vw, 52px);
-    font-weight: 700; line-height: 1.1; text-transform: uppercase;
-  }
-  .t-h2 {
-    font-family: var(--font-display);
-    font-size: 30px; font-weight: 600; line-height: 1.2; text-transform: uppercase;
-  }
-  .t-body-lg { font-size: 20px; line-height: 1.6; }
-  .t-body-md { font-size: 16px; line-height: 1.6; }
-  .t-label-caps {
-    font-family: var(--font-display);
-    font-size: 14px; font-weight: 600; line-height: 1.0;
-    letter-spacing: 0.1em; text-transform: uppercase;
+  h1, h2, h3 { text-wrap: balance; }
+
+  .wrap { max-width: var(--content-max); margin: 0 auto; padding: 0 24px; }
+  section { padding: var(--section-pad) 0; }
+  .eyebrow {
+    display: inline-block; font-family: var(--font-display); font-weight: 600;
+    font-size: 0.875rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--stoken-blue); margin-bottom: 16px;
   }
 
-  .container { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; }
-  .container-narrow { max-width: 820px; margin: 0 auto; padding: 0 24px; }
-
-  section { padding: 88px 0; }
-  .section-eyebrow { display: inline-block; color: var(--stoken-blue); letter-spacing: 0.22em; margin-bottom: 16px; }
-
-  /* ============= HEADER (slim) ============= */
-  header.topbar {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(8, 9, 11, 0.85);
-    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+  /* Type scale (modular, ~1.28) */
+  .display {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(2.4rem, 5.2vw, 4.5rem); line-height: 1.02;
+    letter-spacing: -0.01em; text-transform: uppercase; color: var(--text-primary);
   }
-  .topbar-inner { max-width: var(--container-max); margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; }
-  .topbar-inner .brand img { height: 38px; width: auto; }
+  .h2 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(1.9rem, 3.6vw, 3rem); line-height: 1.06;
+    text-transform: uppercase; color: var(--text-primary);
+  }
+  .h3 {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 1.5rem; line-height: 1.15; text-transform: uppercase; color: var(--text-primary);
+  }
+  .lead { font-size: 1.2rem; line-height: 1.6; color: var(--on-surface-variant); }
+  .prose { max-width: var(--prose-max); }
+  .prose p { color: var(--on-surface-variant); }
+  .prose p + p { margin-top: 1.2rem; }
 
-  /* ============= BUTTONS ============= */
+  /* Buttons */
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 16px 36px; font-family: var(--font-display);
-    font-size: 15px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-    border: none; cursor: pointer; transition: all 0.25s ease;
+    font-size: 0.95rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    border: none; cursor: pointer; transition: box-shadow 0.25s ease, filter 0.2s ease;
   }
   .btn-primary { background: var(--stoken-blue); color: #000; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); }
   .btn-primary:hover { box-shadow: 0 0 45px rgba(0, 229, 255, 0.6); }
-  .btn-outline { border: 2px solid rgba(201, 198, 197, 0.35); color: var(--stoken-silver); }
-  .btn-outline:hover { border-color: var(--stoken-blue); color: var(--stoken-blue); }
   .btn .material-symbols-outlined { font-size: 18px; }
 
-  /* ============= HERO ============= */
-  .hero {
-    position: relative; overflow: hidden;
-    padding: 96px 0 88px; text-align: center;
+  /* Image slots: intentional placeholders until photos land */
+  .slot {
+    position: relative; overflow: hidden; border-radius: 14px;
+    border: 1px solid var(--hairline); background: var(--surface-container-low);
   }
-  .hero::before {
-    content: ''; position: absolute; top: -220px; left: 50%;
-    width: 900px; height: 700px; transform: translateX(-50%);
-    background: radial-gradient(circle, rgba(0, 229, 255, 0.14) 0%, transparent 60%);
-    filter: blur(60px); pointer-events: none;
-  }
-  .hero-inner { position: relative; z-index: 1; }
-  .hero h1 { color: var(--text-primary); margin-bottom: 20px; }
-  .hero-sub { color: var(--on-surface-variant); max-width: 620px; margin: 0 auto 32px; }
-  .hero-visual { margin-top: 56px; }
-
-  /* ============= IMAGE SLOTS (placeholder until file lands) ============= */
-  .img-slot {
-    position: relative; overflow: hidden;
-    aspect-ratio: 3 / 2; border-radius: 14px;
-    border: 1px solid rgba(255,255,255,0.08);
+  .slot--fan { aspect-ratio: 4 / 5; }
+  .slot--grid { aspect-ratio: 4 / 3; }
+  .slot--closeup { aspect-ratio: 4 / 5; }
+  .slot-ph {
+    position: absolute; inset: 0; z-index: 0;
+    display: flex; align-items: center; justify-content: center; padding: 24px;
     background: var(--surface-container-low);
   }
-  .img-slot--wide { aspect-ratio: 16 / 9; }
-  .img-slot--card { aspect-ratio: 4 / 3; }
-  .img-ph {
-    position: absolute; inset: 0; z-index: 0;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
-    background:
-      repeating-linear-gradient(45deg, #16181f 0 14px, #14161d 14px 28px);
-    color: rgba(201, 198, 197, 0.5); text-align: center; padding: 24px;
+  .slot-ph span {
+    font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase; color: rgba(201, 198, 197, 0.45); text-align: center;
   }
-  .img-ph .material-symbols-outlined { font-size: 40px; color: rgba(0, 229, 255, 0.35); }
-  .img-ph-cap {
-    font-family: var(--font-display); font-size: 13px; font-weight: 600;
-    letter-spacing: 0.14em; text-transform: uppercase;
+  .slot img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Hero */
+  .hero { padding-top: clamp(3rem, 6vw, 4.5rem); }
+  .hero-grid {
+    display: grid;
+    grid-template-areas: "text" "media" "cta";
+    gap: 32px;
   }
-  .img-slot img {
-    position: relative; z-index: 1;
-    width: 100%; height: 100%; object-fit: cover; display: block;
+  .hero-text { grid-area: text; }
+  .hero-media { grid-area: media; }
+  .hero-cta { grid-area: cta; }
+  .hero h1 { margin-bottom: 20px; }
+  .hero-sub { max-width: 34ch; }
+  @media (min-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 55fr 45fr;
+      grid-template-areas: "text media" "cta media";
+      grid-template-rows: auto 1fr;
+      column-gap: 56px;
+      row-gap: 28px;
+    }
+    .hero-media { align-self: center; }
+    .hero-cta { align-self: start; }
   }
 
-  /* ============= DECK OF US ============= */
+  /* Deck of Us */
   .deck { background: var(--surface-raised); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
-  .deck-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-  .deck h2 { color: var(--text-primary); margin-bottom: 20px; }
-  .deck p + p { margin-top: 18px; }
-  .deck p { color: var(--on-surface-variant); }
+  .deck h2 { margin-bottom: 24px; }
+  .deck .deck-visual { margin-top: 48px; }
 
-  /* ============= CASE STUDY ============= */
-  .case h2 { color: var(--text-primary); margin-bottom: 28px; }
-  .case-body p { color: var(--on-surface-variant); max-width: 720px; }
-  .case-body p + p { margin-top: 18px; }
-
-  .case-media { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); margin: 48px 0; }
-
-  .pullquote {
-    margin: 48px 0; padding: 8px 0 8px 32px;
-    border-left: 4px solid var(--stoken-blue);
+  /* Case study */
+  .case h2 { margin-bottom: 32px; }
+  .case-break {
     font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
-    font-size: clamp(32px, 5vw, 52px); line-height: 1.05; color: var(--text-primary);
+    font-size: clamp(1.6rem, 3vw, 2.4rem); line-height: 1.1; color: var(--text-primary);
+    max-width: 22ch; margin: 56px 0 20px;
   }
-
-  .quote-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gutter); margin-top: 48px; }
-  .quote-card {
-    background: var(--surface-container-low); border: 1px solid rgba(255,255,255,0.06);
-    padding: 28px; border-radius: 12px;
+  .debbie {
+    display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center;
+    margin: 40px 0;
   }
-  .quote-card p { color: var(--on-surface); font-size: 18px; font-style: italic; }
+  @media (min-width: 900px) { .debbie { grid-template-columns: 1.4fr 1fr; } }
+  .debbie blockquote {
+    font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+    font-size: clamp(2.6rem, 6vw, 5rem); line-height: 0.98; letter-spacing: -0.01em;
+    color: var(--text-primary); border-left: 5px solid var(--stoken-blue); padding-left: 28px;
+  }
+  .heard-label {
+    font-family: var(--font-display); font-weight: 600; font-size: 0.875rem;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--stoken-silver);
+    margin: 56px 0 24px;
+  }
+  .quote-cluster { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .qblock { position: relative; padding: 28px 24px 24px; background: var(--surface-container-low); border-radius: 12px; }
+  .qblock::before {
+    content: '\201C'; position: absolute; top: -14px; left: 14px;
+    font-family: Georgia, serif; font-size: 5rem; line-height: 1;
+    color: rgba(0, 229, 255, 0.16);
+  }
+  .qblock p { position: relative; color: var(--on-surface); font-size: 1.05rem; font-style: italic; }
+  .case-close { margin: 48px 0 40px; }
 
-  /* ============= PRICING ============= */
+  /* How it works */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 8px; }
+  .step { background: var(--surface-container-low); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 32px; }
+  .step-num { font-family: var(--font-display); font-weight: 800; font-size: 2.6rem; line-height: 1; color: var(--stoken-blue); margin-bottom: 12px; }
+  .step h3 { margin-bottom: 8px; }
+  .step p { color: var(--on-surface-variant); font-size: 1rem; }
+  .howto h2 { margin-bottom: 40px; }
+
+  /* Pricing */
   .pricing { background: var(--surface-raised); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
-  .pricing h2 { color: var(--text-primary); margin-bottom: 32px; }
-  .price-table { width: 100%; border-collapse: collapse; }
-  .price-table th, .price-table td { text-align: left; padding: 18px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-  .price-table thead th {
-    font-family: var(--font-display); font-size: 13px; font-weight: 600;
-    letter-spacing: 0.14em; text-transform: uppercase; color: rgba(201, 198, 197, 0.65);
+  .pricing h2 { margin-bottom: 36px; }
+  .price-rows { max-width: var(--content-max); }
+  .price-row {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 24px;
+    padding: 22px 4px; border-bottom: 1px solid var(--hairline);
   }
-  .price-table tbody th { font-weight: 700; color: var(--text-primary); font-family: var(--font-body); font-size: 16px; }
-  .price-table td { color: var(--on-surface-variant); }
-  .price-table .price { color: var(--stoken-blue); font-weight: 700; white-space: nowrap; }
-  .price-fine { margin-top: 20px; color: rgba(201, 198, 197, 0.65); font-size: 14px; }
-
-  /* ============= HOW IT WORKS ============= */
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gutter); margin-top: 12px; }
-  .step { background: var(--surface-container-low); border: 1px solid rgba(255,255,255,0.06); padding: 32px; border-radius: 12px; }
-  .step-num {
-    font-family: var(--font-display); font-weight: 800; font-size: 44px; line-height: 1;
-    color: var(--stoken-blue); margin-bottom: 14px;
+  .price-row .offering { font-weight: 700; color: var(--on-surface); font-size: 1.1rem; }
+  .price-row .meta { display: flex; align-items: baseline; gap: 28px; flex-shrink: 0; text-align: right; }
+  .price-row .group { color: var(--on-surface-variant); font-size: 0.95rem; }
+  .price-row .price { color: var(--on-surface); font-weight: 700; white-space: nowrap; }
+  .price-row--primary {
+    background: var(--surface-container); border: 1px solid rgba(0, 229, 255, 0.25);
+    border-radius: 14px; padding: 26px 24px; margin-bottom: 8px;
+    box-shadow: 0 0 40px -12px rgba(0, 229, 255, 0.25);
   }
-  .step h3 { color: var(--text-primary); margin-bottom: 8px; }
-  .step p { color: var(--on-surface-variant); font-size: 15px; }
-  .howto h2, .faq h2 { color: var(--text-primary); margin-bottom: 40px; }
+  .price-row--primary .offering { font-size: 1.35rem; }
+  .price-row--primary .price { color: var(--stoken-blue); font-size: 1.5rem; }
+  .price-note { max-width: var(--prose-max); margin-top: 32px; color: var(--on-surface-variant); }
+  .budget-block { max-width: var(--prose-max); margin-top: 24px; padding: 24px; border-left: 3px solid var(--stoken-blue); background: var(--surface-container-low); border-radius: 0 10px 10px 0; }
+  .budget-block b { color: var(--text-primary); }
+  .pricing-cta { margin-top: 40px; }
+  @media (max-width: 640px) {
+    .price-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .price-row .meta { flex-direction: row; gap: 20px; text-align: left; }
+  }
 
-  /* ============= FAQ ============= */
-  .faq-list { display: flex; flex-direction: column; gap: 4px; }
-  .faq-item { border-bottom: 1px solid rgba(255,255,255,0.08); padding: 24px 0; }
-  .faq-item h3 { color: var(--text-primary); font-family: var(--font-display); font-weight: 600; font-size: 22px; text-transform: uppercase; letter-spacing: 0.01em; margin-bottom: 8px; }
+  /* FAQ */
+  .faq { padding-top: clamp(3rem, 7vw, 5rem); padding-bottom: clamp(3rem, 7vw, 5rem); }
+  .faq h2 { margin-bottom: 36px; }
+  .faq-list { max-width: var(--prose-max); }
+  .faq-item { padding: 22px 0; border-bottom: 1px solid var(--hairline); }
+  .faq-item h3 { font-size: 1.35rem; margin-bottom: 8px; }
   .faq-item p { color: var(--on-surface-variant); }
 
-  /* ============= CLOSING CTA ============= */
-  .closing { text-align: center; }
-  .closing h2 { color: var(--text-primary); margin-bottom: 16px; }
-  .closing p { color: var(--on-surface-variant); margin-bottom: 32px; }
-  .closing-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; align-items: center; }
-  .closing-email { color: var(--stoken-silver); font-family: var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; font-size: 14px; }
-  .closing-email:hover { color: var(--stoken-blue); }
-
-  /* ============= FOOTER + PIP ============= */
-  footer {
-    position: relative; background: #08090b; border-top: 1px solid rgba(255,255,255,0.05);
-    padding: 40px 24px; text-align: center;
+  /* Closing CTA + form */
+  .start { text-align: center; }
+  .start h2 { margin-bottom: 16px; }
+  .start-body { max-width: 52ch; margin: 0 auto 36px; color: var(--on-surface-variant); }
+  .start-form { max-width: 520px; margin: 0 auto; text-align: left; }
+  .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .field label { font-family: var(--font-display); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(201, 198, 197, 0.7); }
+  .field input {
+    width: 100%; background: var(--surface-container-low); border: 1px solid var(--hairline);
+    color: var(--text-primary); padding: 14px 16px; font-family: var(--font-body); font-size: 1rem;
+    border-radius: 8px; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
-  .footer-copy { font-family: var(--font-body); font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(201, 198, 197, 0.3); }
-  .footer-copy a { color: rgba(201, 198, 197, 0.55); }
-  .footer-copy a:hover { color: var(--text-primary); }
+  .field input:focus { border-color: var(--stoken-blue); box-shadow: 0 0 0 1px var(--stoken-blue); }
+  .start-form .btn { width: 100%; justify-content: center; }
+  .start-email { display: inline-block; margin-top: 24px; color: var(--stoken-silver); font-family: var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.85rem; }
+  .start-email:hover { color: var(--stoken-blue); }
+  .form-success {
+    display: none; margin-top: 20px; padding: 16px; text-align: center; border-radius: 8px;
+    background: rgba(0, 229, 255, 0.08); border: 1px solid rgba(0, 229, 255, 0.3); color: var(--stoken-blue);
+  }
+  .form-success.is-visible { display: block; }
 
-  .pip-accent { position: absolute; bottom: -6px; right: 24px; width: 132px; z-index: 1; }
+  /* Footer */
+  footer { position: relative; background: #08090b; border-top: 1px solid rgba(255,255,255,0.05); padding: 44px 24px; }
+  .footer-inner { max-width: var(--content-max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .footer-brand img { height: 30px; width: auto; filter: grayscale(1); opacity: 0.85; }
+  .footer-meta { font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(201, 198, 197, 0.5); display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .footer-meta a:hover { color: var(--stoken-blue); }
+
+  .pip-accent { position: absolute; bottom: -4px; right: 28px; width: 120px; z-index: 1; }
   .pip-accent img { width: 100%; height: auto; display: block; transition: filter 180ms ease; }
   .pip-accent:hover img, .pip-accent:focus-visible img { filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.45)); }
   .pip-accent:focus-visible { outline: 2px solid var(--stoken-blue); outline-offset: 4px; }
@@ -251,16 +278,16 @@
   }
 
   @media (max-width: 860px) {
-    .deck-grid { grid-template-columns: 1fr; gap: 32px; }
-    .case-media { grid-template-columns: 1fr; }
-    .quote-row { grid-template-columns: 1fr; }
+    .quote-cluster { grid-template-columns: 1fr; }
     .steps { grid-template-columns: 1fr; }
     .pip-accent { display: none; }
-    .price-table thead { display: none; }
-    .price-table, .price-table tbody, .price-table tr, .price-table th, .price-table td { display: block; width: 100%; }
-    .price-table tr { border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; margin-bottom: 16px; padding: 8px 4px; }
-    .price-table td, .price-table tbody th { border-bottom: none; padding: 6px 20px; }
+    .footer-inner { flex-direction: column; text-align: center; }
   }
+
+  /* Slim sticky header */
+  header.topbar { position: sticky; top: 0; z-index: 100; background: rgba(8,9,11,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .topbar-inner { max-width: var(--content-max); margin: 0 auto; padding: 15px 24px; display: flex; align-items: center; }
+  .topbar-inner img { height: 36px; width: auto; }
 </style>
 </head>
 <body>
@@ -268,172 +295,192 @@
 <!-- HEADER -->
 <header class="topbar">
   <div class="topbar-inner">
-    <a href="/" class="brand" aria-label="Stoken Games home">
-      <img src="/images/logo.png" alt="Stoken Games">
-    </a>
+    <a href="/" aria-label="Stoken Games home"><img src="/images/logo.png" alt="Stoken Games"></a>
   </div>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="container">
-    <div class="hero-inner">
-      <span class="t-label-caps section-eyebrow">Team Games</span>
-      <h1 class="t-display">Custom games that turn teams into teammates</h1>
-      <p class="t-body-lg hero-sub">Your team, as a game worth keeping. Fixed prices, an 8 week runway, designed and run by the founder.</p>
-      <a href="/#contact" class="btn btn-primary">Start a conversation <span class="material-symbols-outlined">arrow_forward</span></a>
-    </div>
-    <div class="hero-visual">
-      <figure class="img-slot img-slot--wide">
-        <div class="img-ph"><span class="material-symbols-outlined">image</span><span class="img-ph-cap">A fanned hand of cards</span></div>
-        <img src="/images/teamgames-card-fan.jpg" alt="A fanned hand of custom Deck of Us trading cards." loading="lazy" onerror="this.style.display='none'">
-      </figure>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">Team Games</span>
+        <h1 class="display">Every person on your team becomes a trading card. Then you play.</h1>
+        <p class="lead hero-sub">Deck of Us is a live team event built around custom cards of the people in the room. Fixed price from $7,500, eight weeks from kickoff to event day, designed and run by the founder.</p>
+      </div>
+      <div class="hero-media">
+        <figure class="slot slot--fan">
+          <div class="slot-ph"><span>Deck of Us cards</span></div>
+          <img src="/images/teamgames-card-fan.jpg" alt="The founder fanning a hand of sealed Deck of Us foil card packs." loading="eager" onerror="this.style.display='none'">
+        </figure>
+      </div>
+      <div class="hero-cta">
+        <a href="#start" class="btn btn-primary">Start a conversation <span class="material-symbols-outlined">arrow_forward</span></a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- DECK OF US -->
 <section class="deck">
-  <div class="container">
-    <div class="deck-grid">
-      <div class="deck-copy">
-        <span class="t-label-caps section-eyebrow">Deck of Us</span>
-        <h2 class="t-h1">Your team as a trading card game.</h2>
-        <p class="t-body-lg">Every person becomes a card: custom chibi art, five stats drawn from their real work, two signature powers, and a fun fact. Printed on professional trading card stock, the same 2.5 by 3.5 inches as the cards people already collect.</p>
-        <p class="t-body-lg">The live event brings it together. Players pair up and combine their cards against scenarios projected on screen. When a scenario matches a power on the table, bonus points fire. To win, you have to know what your teammates are good at. That is the point.</p>
-      </div>
-      <div class="deck-visual">
-        <figure class="img-slot img-slot--card">
-          <div class="img-ph"><span class="material-symbols-outlined">grid_view</span><span class="img-ph-cap">The full 20-card deck</span></div>
-          <img src="/images/teamgames-deck-grid.png" alt="A grid of twenty custom teammate cards, one full Deck of Us." loading="lazy" onerror="this.style.display='none'">
-        </figure>
-      </div>
+  <div class="wrap">
+    <span class="eyebrow">Deck of Us</span>
+    <h2 class="h2">Your team as a trading card game.</h2>
+    <div class="prose">
+      <p class="lead">Every person becomes a card: custom chibi art, five stats drawn from their real work, two signature powers, and a fun fact. Printed on trading card stock, the same 2.5 by 3.5 inches as the cards people already collect.</p>
+      <p class="lead">At the live event, players pair up and combine their cards against scenarios projected on screen. When a scenario matches a power on the table, bonus points fire. To win, you have to know what your teammates are good at. That is the point.</p>
+    </div>
+    <div class="deck-visual">
+      <figure class="slot slot--grid">
+        <div class="slot-ph"><span>The full 20-card deck</span></div>
+        <img src="/images/teamgames-deck-grid.jpg" alt="A spread of custom teammate cards from a Deck of Us deck." loading="lazy" onerror="this.style.display='none'">
+      </figure>
     </div>
   </div>
 </section>
 
 <!-- CASE STUDY -->
 <section class="case">
-  <div class="container">
-    <span class="t-label-caps section-eyebrow">Case study</span>
-    <h2 class="t-h1">The Analytics Card Battle</h2>
+  <div class="wrap">
+    <span class="eyebrow">Case study</span>
+    <h2 class="h2">The Analytics Card Battle</h2>
 
-    <div class="case-body">
-      <p class="t-body-lg">A 20-person corporate analytics team was working through the SERVE leadership model, and one principle kept surfacing: engage and develop others. Which raises an honest question. How do you develop people you barely know?</p>
-      <p class="t-body-lg">Eight weeks later, every person on the team was a trading card. A short survey became five stats per person. Each card got two signature powers, a fun fact, and custom art. Twenty people, twenty cards, one deck that could only belong to this team.</p>
+    <div class="prose">
+      <p class="lead">A 20-person corporate analytics team was working through the SERVE leadership model, and one principle kept surfacing: engage and develop others. How do you develop people you barely know?</p>
+      <p class="lead">Eight weeks later, every person on the team was a trading card. A short survey became five stats per person. Each card got two signature powers, a fun fact, and custom art. Twenty people, twenty cards, one deck that could only belong to this team.</p>
     </div>
 
-    <div class="case-media">
-      <figure class="img-slot img-slot--card">
-        <div class="img-ph"><span class="material-symbols-outlined">style</span><span class="img-ph-cap">Card front and back</span></div>
-        <img src="/images/teamgames-card-closeup.jpg" alt="Close-up of a Deck of Us card, front and back, showing chibi art and stats." loading="lazy" onerror="this.style.display='none'">
+    <p class="case-break">Within minutes of the first round, people were trading.</p>
+
+    <div class="prose">
+      <p class="lead">Everyone wanted their own card, and some campaigned hard for specific teammates.</p>
+    </div>
+
+    <div class="debbie">
+      <blockquote>"I just need to trade for a Debbie!"</blockquote>
+      <figure class="slot slot--closeup">
+        <div class="slot-ph"><span>Card, front and back</span></div>
+        <img src="/images/teamgames-card-closeup.jpg" alt="Close-up of a Deck of Us card held in hand, showing the chibi art and stat line." loading="lazy" onerror="this.style.display='none'">
       </figure>
-      <figure class="img-slot">
-        <div class="img-ph"><span class="material-symbols-outlined">groups</span><span class="img-ph-cap">Event day</span></div>
-        <img src="/images/teamgames-room.jpg" alt="The live event room during an Analytics Card Battle session." loading="lazy" onerror="this.style.display='none'">
-      </figure>
     </div>
 
-    <div class="case-body">
-      <p class="t-body-lg">Within minutes of the first round, people were trading. Everyone wanted their own card, and some campaigned hard for specific teammates.</p>
+    <div class="prose">
+      <p class="lead">The next day, people were still trading, trying to assemble their full teams. One player quietly swapped his ID badge photo for his player card.</p>
     </div>
 
-    <blockquote class="pullquote">"I just need to trade for a Debbie!"</blockquote>
-
-    <div class="case-body">
-      <p class="t-body-lg">The next day, people were still trading, trying to assemble their full teams. One player quietly swapped his ID badge photo for his player card.</p>
+    <p class="heard-label">Heard at the event and the morning after</p>
+    <div class="quote-cluster">
+      <div class="qblock"><p>How are you going to top this one?</p></div>
+      <div class="qblock"><p>That was so fun. Can you make cards for my family?</p></div>
+      <div class="qblock"><p>I had no idea what to expect, but it definitely wasn't this.</p></div>
     </div>
 
-    <div class="quote-row">
-      <div class="quote-card"><p>"How are you going to top this one?"</p></div>
-      <div class="quote-card"><p>"That was so fun. Can you make cards for my family?"</p></div>
-      <div class="quote-card"><p>"I had no idea what to expect, but it definitely wasn't this," said with a grin.</p></div>
+    <div class="prose case-close">
+      <p class="lead">The assignment was engage and develop others. That is hard with someone you barely know, and much easier once you have campaigned to trade for her card because you know exactly what she is good at. The badge photo says the rest.</p>
     </div>
-  </div>
-</section>
 
-<!-- PRICING -->
-<section class="pricing">
-  <div class="container">
-    <h2 class="t-h1">Pricing</h2>
-    <table class="price-table">
-      <thead>
-        <tr><th>Offering</th><th>Group</th><th>Price</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">Deck of Us, standard</th>
-          <td>up to 20 people</td>
-          <td class="price">$7,500</td>
-        </tr>
-        <tr>
-          <th scope="row">Deck of Us, large team</th>
-          <td>21 to 40 people</td>
-          <td class="price">$12,000</td>
-        </tr>
-        <tr>
-          <th scope="row">Supply Unchained, live event</th>
-          <td>20 to 300 players</td>
-          <td class="price">scoped per event, typically $10,000 to 25,000</td>
-        </tr>
-        <tr>
-          <th scope="row">Custom design</th>
-          <td>something else in mind</td>
-          <td class="price">scoped, from $15,000</td>
-        </tr>
-      </tbody>
-    </table>
-    <p class="price-fine">Travel billed at cost. No hourly rates, no scope creep, one number.</p>
+    <a href="#start" class="btn btn-primary">Start a conversation <span class="material-symbols-outlined">arrow_forward</span></a>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
 <section class="howto">
-  <div class="container">
-    <h2 class="t-h1">How it works</h2>
+  <div class="wrap">
+    <h2 class="h2">How it works</h2>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
-        <h3 class="t-h2">Discovery call</h3>
-        <p>Thirty minutes: fit, roster size, date.</p>
+        <h3 class="h3">Discovery call</h3>
+        <p>30 minutes: fit, roster size, date.</p>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <h3 class="t-h2">Intake and build</h3>
+        <h3 class="h3">Intake and build</h3>
         <p>A 20 minute survey per person. We handle the art, the cards, and the printing, with a preview for your host before event day.</p>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <h3 class="t-h2">Event day</h3>
+        <h3 class="h3">Event day</h3>
         <p>We run the room for about two hours. Everyone keeps their cards.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- PRICING -->
+<section class="pricing">
+  <div class="wrap">
+    <h2 class="h2">Pricing</h2>
+    <div class="price-rows">
+      <div class="price-row price-row--primary">
+        <div class="offering">Deck of Us, standard</div>
+        <div class="meta"><span class="group">up to 20 people</span><span class="price">$7,500</span></div>
+      </div>
+      <div class="price-row">
+        <div class="offering">Deck of Us, large team</div>
+        <div class="meta"><span class="group">21 to 40 people</span><span class="price">$12,000</span></div>
+      </div>
+      <div class="price-row">
+        <div class="offering">Supply Unchained, a supply chain strategy game for conferences and offsites</div>
+        <div class="meta"><span class="group">20 to 300 players</span><span class="price">scoped per event, typically $10,000 to $25,000</span></div>
+      </div>
+      <div class="price-row">
+        <div class="offering">Custom design</div>
+        <div class="meta"><span class="group">something else in mind</span><span class="price">scoped, from $15,000</span></div>
+      </div>
+    </div>
+
+    <p class="price-note">Both Deck of Us prices include game design, custom art for every card, printing on trading card stock, live facilitation by the founder who designed it, and a debrief writeup for your sponsor. At 20 people, the standard package works out to $375 a person, and everyone keeps the deck. Travel billed at cost. Everything else is the number above.</p>
+
+    <div class="budget-block">
+      <b>Built for the budget conversation.</b> One fixed price that fits on a single line of a budget request, and an event that doubles as a development exercise, because the stats come from people's real work.
+    </div>
+
+    <div class="pricing-cta">
+      <a href="#start" class="btn btn-primary">Start a conversation <span class="material-symbols-outlined">arrow_forward</span></a>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="faq">
-  <div class="container-narrow">
-    <h2 class="t-h1">FAQ</h2>
+  <div class="wrap">
+    <h2 class="h2">FAQ</h2>
     <div class="faq-list">
       <div class="faq-item">
-        <h3>How much of our team's time does this take?</h3>
+        <h3 class="h3">How much of our team's time does this take?</h3>
         <p>A roster, about 20 minutes per person for the survey, and one preview meeting with your host.</p>
       </div>
       <div class="faq-item">
-        <h3>How far in advance do we book?</h3>
+        <h3 class="h3">How far in advance do we book?</h3>
         <p>Eight weeks from kickoff to event day.</p>
       </div>
       <div class="faq-item">
-        <h3>Do you travel?</h3>
+        <h3 class="h3">What if my team is not into games?</h3>
+        <p>The rules are deliberately simple: pair up, play your cards, match powers to the scenario on screen. Nobody needs to have touched a trading card since middle school. The cards do the heavy lifting, because the subject of the game is the people in the room.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="h3">Does this work for remote or hybrid teams?</h3>
+        <p>The event is designed for a room, which is why offsites and kickoffs are the natural fit. If your team is distributed, raise it on the discovery call and we will talk through options.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="h3">What do people have to share?</h3>
+        <p>A 20 minute survey about their work and a photo for the art. Stats are drawn from what each person is actually good at, and your host previews the full deck before anything is printed.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="h3">What do we need to provide on the day?</h3>
+        <p>A room, a screen or projector, and about two hours of the agenda. We bring everything else.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="h3">Do you travel?</h3>
         <p>Yes. Travel is billed at cost, on top of the fixed price.</p>
       </div>
       <div class="faq-item">
-        <h3>What is included?</h3>
-        <p>Game design, custom art, professional printing, live facilitation by the designer, and a debrief writeup your sponsor can circulate afterward.</p>
+        <h3 class="h3">What is included?</h3>
+        <p>Game design, custom art, printing on trading card stock, live facilitation by the founder who designed it, and a debrief writeup your sponsor can circulate afterward.</p>
       </div>
       <div class="faq-item">
-        <h3>What kind of events does this fit?</h3>
+        <h3 class="h3">What kind of events does this fit?</h3>
         <p>Sales kickoffs, onboarding, offsites that need a centerpiece, and team integration after reorgs.</p>
       </div>
     </div>
@@ -441,24 +488,64 @@
 </section>
 
 <!-- CLOSING CTA -->
-<section class="closing">
-  <div class="container-narrow">
-    <h2 class="t-h1">Interested in a deck for your team?</h2>
-    <p class="t-body-lg">Start the conversation.</p>
-    <div class="closing-actions">
-      <a href="/#contact" class="btn btn-primary">Start a conversation <span class="material-symbols-outlined">arrow_forward</span></a>
-      <a href="mailto:info@stoken.games" class="closing-email">info@stoken.games</a>
-    </div>
+<section class="start" id="start">
+  <div class="wrap">
+    <h2 class="h2">Want a deck for your team?</h2>
+    <p class="lead start-body">Send your team size and a rough date. You will hear back from the founder who designs and runs the event, not a sales team. The first step is a 30 minute call about fit.</p>
+
+    <form class="start-form" action="https://formspree.io/f/mwvapwld" method="POST" id="start-form">
+      <input type="hidden" name="_subject" value="Deck of Us for my team">
+      <div class="field">
+        <label for="tg-team">Team size</label>
+        <input type="text" id="tg-team" name="team size" placeholder="e.g. 20 people" required>
+      </div>
+      <div class="field">
+        <label for="tg-date">Rough date</label>
+        <input type="text" id="tg-date" name="rough date" placeholder="e.g. Q1, or a specific week" required>
+      </div>
+      <div class="field">
+        <label for="tg-email">Email</label>
+        <input type="email" id="tg-email" name="email" placeholder="you@company.com" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Start a conversation <span class="material-symbols-outlined">arrow_forward</span></button>
+    </form>
+    <div class="form-success" id="start-success">Thanks. Your note is in. You will hear back from the founder.</div>
+
+    <a href="mailto:info@stoken.games?subject=Deck%20of%20Us%20for%20my%20team&amp;body=Team%20size%3A%0ARough%20date%3A%0A" class="start-email">info@stoken.games</a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p class="footer-copy">© 2026 Stoken Games LLC · <a href="/">stoken.games</a></p>
+  <div class="footer-inner">
+    <a href="/" class="footer-brand" aria-label="Stoken Games home"><img src="/images/logo.png" alt="Stoken Games"></a>
+    <div class="footer-meta">
+      <span>Stoken Games LLC</span>
+      <a href="mailto:info@stoken.games">info@stoken.games</a>
+    </div>
+  </div>
   <a href="/pip/" class="pip-accent" aria-label="Pip's personnel file">
     <img src="/images/pip-content.png" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">
   </a>
 </footer>
 
+<script>
+(function () {
+  'use strict';
+  var form = document.getElementById('start-form');
+  var success = document.getElementById('start-success');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var data = new FormData(form);
+    fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+      .then(function (res) {
+        if (res.ok) { form.style.display = 'none'; success.classList.add('is-visible'); }
+        else { form.submit(); }
+      })
+      .catch(function () { form.submit(); });
+  });
+})();
+</script>
 </body>
 </html>
