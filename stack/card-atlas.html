@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Endless Atlas — the map of every card · stoken·games</title>
 <meta property="og:title" content="Endless Atlas — the map of every card">
 <meta property="og:description" content="The map of every Magic: the Gathering card.">
@@ -91,7 +91,49 @@ background:rgba(12,12,12,.94);border:1px solid var(--line);border-radius:11px;pa
 #clrows div{display:flex;align-items:center;gap:7px;font-size:12px;color:#ddd;padding:2.5px 0;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #clrows div:hover{color:var(--cyan)}
 #clrows i{flex:0 0 8px;height:8px;border-radius:50%}
-@media(max-width:900px){#clist{display:none!important}}
+@media(max-width:900px){body:not(.mob) #clist{display:none!important}}
+
+/* ---- v14 mobile mode: body.mob = coarse pointer OR viewport <900px (set by JS). Desktop untouched. ---- */
+#lensstrip,#mbar,#scrim,#csheet,.shandle{display:none}
+body.mob #lensstrip{display:block;position:fixed;top:0;left:0;right:0;z-index:6;padding:calc(8px + env(safe-area-inset-top)) 10px 10px;background:linear-gradient(180deg,rgba(10,10,10,.97) 62%,rgba(10,10,10,0))}
+body.mob #lensbar{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+body.mob #lensbar::-webkit-scrollbar{display:none}
+body.mob #lensbar button{flex:0 0 auto;padding:8px 13px;font-size:12px;white-space:nowrap}
+body.mob #lenslbl{display:none}
+body.mob #home{top:calc(58px + env(safe-area-inset-top))}
+body.mob #keys{display:none!important}
+body.mob #mini{display:block;width:90px;height:90px;bottom:calc(68px + env(safe-area-inset-bottom))}
+body.mob #zero{left:0}
+body.mob #toast{bottom:calc(76px + env(safe-area-inset-bottom))}
+body.mob #mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:6;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));pointer-events:none;background:linear-gradient(0deg,rgba(10,10,10,.97) 55%,rgba(10,10,10,0))}
+body.mob #mbar>*{pointer-events:auto}
+#mmenu{background:rgba(12,12,12,.96);border:1px solid var(--line);border-radius:10px;color:var(--silver);width:44px;height:44px;font-size:20px;cursor:pointer}
+#mpill{background:rgba(0,229,255,.1);border:1px solid var(--cyan);border-radius:22px;color:var(--cyan);font-family:var(--disp);font-weight:600;letter-spacing:.06em;font-size:13px;padding:11px 16px;cursor:pointer}
+body.mob #scrim{display:block;position:fixed;inset:0;z-index:8;background:rgba(0,0,0,.45)}
+body.mob #scrim:not(.on){display:none}
+.shandle{width:40px;height:4px;border-radius:2px;background:#3a3a3a;margin:2px auto 12px;flex:0 0 auto;touch-action:none}
+body.mob .shandle{display:block}
+body.mob #rail,body.mob #clist{left:0;right:0;top:auto;bottom:0;width:auto;height:auto;max-height:70dvh;border-right:0;border-top:1px solid var(--line);border-radius:16px 16px 0 0;background:rgba(12,12,12,.98);box-shadow:0 -12px 40px -14px #000;transform:translateY(102%);transition:transform .28s cubic-bezier(.2,.8,.2,1);padding-bottom:calc(16px + env(safe-area-inset-bottom));touch-action:pan-y}
+body.mob #rail{padding-top:10px;z-index:9;overflow-y:auto}
+body.mob #clist{z-index:9;padding:10px 14px calc(16px + env(safe-area-inset-bottom))}
+body.mob #rail.open,body.mob #clist.open{transform:none}
+body.mob #clrows{height:auto;max-height:calc(70dvh - 100px)}
+body.mob #clrows div{font-size:14px;padding:6px 0}
+body.mob input[type=text],body.mob .mvrow input{font-size:16px}
+body.mob #csheet{display:flex;position:fixed;left:0;right:0;bottom:calc(60px + env(safe-area-inset-bottom));z-index:7;gap:14px;align-items:flex-start;padding:14px 14px 16px;background:rgba(12,12,12,.98);border-top:1px solid var(--line);border-radius:16px 16px 0 0;box-shadow:0 -12px 40px -14px #000;transform:translateY(102%);transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+body.mob #csheet.open{transform:none}
+/* closed sheets are fully inert: no leaking into the bottom bar, no swallowed taps */
+body.mob #csheet:not(.open),body.mob #rail:not(.open),body.mob #clist:not(.open){visibility:hidden;pointer-events:none;transition:transform .28s cubic-bezier(.2,.8,.2,1),visibility 0s linear .28s}
+body.mob #csheet.open,body.mob #rail.open,body.mob #clist.open{visibility:visible;transition:transform .28s cubic-bezier(.2,.8,.2,1),visibility 0s}
+#csheet img{width:96px;flex:0 0 96px;border-radius:5%/3.6%;background:#151515;min-height:134px}
+#csheet .csbody{flex:1;min-width:0;padding-right:36px}
+#csheet .csnm{font-family:var(--disp);font-weight:700;font-size:20px;line-height:1.05}
+#csheet .cstl{font-size:12px;color:var(--silver);margin-top:3px}
+#csheet .csdots{display:flex;gap:5px;margin-top:8px}
+#csheet .csdots i{width:12px;height:12px;border-radius:50%;border:1px solid #333}
+#csheet .csbtns{display:flex;gap:8px;margin-top:12px}
+#csopen{background:var(--cyan);border:0;border-radius:8px;color:#04262b;font-family:var(--disp);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:12.5px;padding:10px 14px;cursor:pointer}
+#csx{position:absolute;top:10px;right:10px;background:none;border:1px solid var(--line);border-radius:8px;color:var(--silver);width:32px;height:32px;font-size:15px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -101,20 +143,21 @@ background:rgba(12,12,12,.94);border:1px solid var(--line);border-radius:11px;pa
 <div id="band"></div>
 <button id="home" title="home view (0)">⌂</button>
 <canvas id="mini" width="150" height="150" title="click to jump"></canvas>
-<div id="clist"><div class="clhead"><span id="cln"></span>
+<div id="clist"><div class="shandle"></div><div class="clhead"><span id="cln"></span>
 <button id="clcopy" title="copy names">⧉</button><button id="cldl" title="download .txt">↓</button></div>
 <div id="clrows"></div></div>
 <div id="zero"><span class="z">0 cards match<button id="zreset">Reset filters</button></span></div>
 <div id="toast"></div>
 
 <div id="rail">
+  <div class="shandle"></div>
   <div class="brand">stoken<b>·</b>games</div>
   <h1>ENDLESS <span class="cy">ATLAS</span></h1>
   <div class="sub">the map of every playable Magic card</div>
   <div class="countrow"><span class="count"><span id="nshown">–</span><small>cards shown</small></span>
     <button id="share" title="copy a link to exactly this view">⧉ copy view</button></div>
 
-  <div class="lbl">Lens</div>
+  <div class="lbl" id="lenslbl">Lens</div>
   <div class="lens" id="lensbar"></div>
 
   <div class="lbl">Filtered cards</div>
@@ -163,6 +206,11 @@ background:rgba(12,12,12,.94);border:1px solid var(--line);border-radius:11px;pa
   <img src="https://stoken.games/images/pip-default.png" alt="" style="height:34px;vertical-align:middle;filter:drop-shadow(0 0 6px rgba(0,229,255,.35))" onerror="this.parentNode.style.display='none'"></a></div>
 </div>
 
+<div id="lensstrip"></div>
+<div id="mbar"><button id="mmenu" title="search &amp; filters" aria-label="Open search and filters">☰</button><button id="mpill" style="display:none">cards here</button></div>
+<div id="scrim"></div>
+<div id="csheet"><img id="csimg" alt="" onerror="this.style.visibility='hidden'"><div class="csbody"><div class="csnm" id="csnm"></div><div class="cstl" id="cstl"></div><div class="csdots" id="csdots"></div><div class="csbtns"><button id="csopen">Open on Scryfall ↗</button></div></div><button id="csx" aria-label="Close">✕</button></div>
+
 <div id="tip"><div class="nm"></div><div class="tl"></div><img alt=""></div>
 
 <div id="keys"><div class="hd" id="keyshd"><span>Controls</span><span id="keysx">–</span></div>
@@ -179,8 +227,16 @@ Zoom close — points become cards
 </script>
 <script>
 'use strict';
+// Endless Atlas v14 — mobile pass: touch gestures (pan / pinch anchored via zoomAt / double-tap / tap-select),
+// bottom sheets for the rail + card list, DPR cap on mobile. v13 desktop behaviour is unchanged.
 const D=MAPDATA,N=D.n,LENSES=D.lenses,FRIENDLY=D.friendly;
-const RAIL=()=>innerWidth<=760?232:282;
+// ---- mobile mode: coarse pointer OR narrow viewport. Desktop (fine pointer, >=900px) is untouched.
+const MOBQ=matchMedia('(pointer:coarse)');
+function calcMob(){return MOBQ.matches||innerWidth<900;}
+let isMob=calcMob(),mobBuilt=false;
+const RAIL=()=>isMob?0:(innerWidth<=760?232:282);
+// devicePixelRatio, capped at 2 on mobile for battery; raw on desktop (unchanged behaviour)
+const DPR=()=>isMob?Math.min(2,devicePixelRatio||1):devicePixelRatio;
 const IDHEX={1:'#EDE6C8',2:'#2E86C1',4:'#6E6478',8:'#D8442E',16:'#3FA35A'};
 const MULTI='#C9A54A',GRAY='#7d7d7d';
 const LANDBIT=1<<D.types.indexOf('Land');
@@ -217,7 +273,7 @@ function gridQuery(P,x0,y0,x1,y1,cb){
 // WebGL
 const cv=document.getElementById('gl'),gl=cv.getContext('webgl',{antialias:true});
 if(!gl){const m=document.createElement('div');
-m.style.cssText='position:fixed;top:0;bottom:0;right:0;left:'+(innerWidth<=760?232:282)+'px;display:flex;align-items:center;justify-content:center;padding:32px;text-align:center;z-index:60;background:#0a0a0a';
+m.style.cssText='position:fixed;top:0;bottom:0;right:0;left:'+RAIL()+'px;display:flex;align-items:center;justify-content:center;padding:32px;text-align:center;z-index:60;background:#0a0a0a';
 m.innerHTML='<div style="max-width:440px">'+
 '<div style="font-family:\'Barlow Condensed\',sans-serif;font-weight:700;font-size:30px;letter-spacing:.02em;color:#00E5FF;margin-bottom:14px">WEBGL ISN’T AVAILABLE</div>'+
 '<p style="font-family:Nunito,sans-serif;font-size:15px;line-height:1.55;color:#c9c6c5;margin:0 0 12px">This map is drawn with WebGL, which is switched off in your browser right now.</p>'+
@@ -257,13 +313,14 @@ gl.clearColor(10/255,10/255,10/255,1);
 const view={zoom:1,ox:0,oy:0,t:0},targ={zoom:1,ox:0,oy:0,t:0};
 let lensCur=0,lensNext=1;
 const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
-function resize(){_zTrig=null;cv.width=labcv.width=innerWidth*devicePixelRatio;
-cv.height=labcv.height=innerHeight*devicePixelRatio;
+function resize(){_zTrig=null;applyMob();const dpr=DPR();cv.width=labcv.width=innerWidth*dpr;
+cv.height=labcv.height=innerHeight*dpr;
 cv.style.width=labcv.style.width=innerWidth+'px';
 cv.style.height=labcv.style.height=innerHeight+'px';
 gl.viewport(0,0,cv.width,cv.height);
 document.getElementById('mini').style.left=(RAIL()+14)+'px';req();}
 addEventListener('resize',resize);
+if(MOBQ.addEventListener)MOBQ.addEventListener('change',resize);
 function ascale(z){const a=innerWidth/innerHeight;return a>1?[z/a,z]:[z,z*a];}
 function sprAmt(){const z=view.zoom;return Math.max(0,Math.min(1,(z-6)/4));}
 // Effective (drawn) position = pos blended toward spread by sprAmt — matches the shader
@@ -334,7 +391,7 @@ function draw(){
   const s=ascale(view.zoom);
   gl.uniform1f(U.t,view.t);gl.uniform1f(U.sp,sprAmt());gl.uniform2f(U.sc,s[0],s[1]);
   gl.uniform2f(U.off,view.ox,view.oy);
-  gl.uniform1f(U.ps,Math.max(2.4,Math.min(11,3.2*Math.sqrt(view.zoom)))*devicePixelRatio);
+  gl.uniform1f(U.ps,Math.max(2.4,Math.min(11,3.2*Math.sqrt(view.zoom)))*DPR());
   gl.drawArrays(gl.POINTS,0,N);
   drawLabels(s);updateCards(s);drawMini(s);
   if(moving)req();else saveHash();
@@ -355,10 +412,11 @@ function drawLabels(s){
     if(shown>=cap)break;
     const up=L.l.toUpperCase();
     if(view.zoom<3&&MVONLY.test(up))continue;               // MV-band-only labels wait for zoom
-    const px=(L.x+view.ox)*s[0]*innerWidth*devicePixelRatio;
-    const py=(L.y+view.oy)*s[1]*innerHeight*devicePixelRatio;
-    if(px<RAIL()*devicePixelRatio-40||px>labcv.width+40||py<0||py>labcv.height)continue;
-    const size=(9.5+3.2*Math.log2(Math.max(1,L.n/70)))*devicePixelRatio;
+    const dpr=DPR();
+    const px=(L.x+view.ox)*s[0]*innerWidth*dpr;
+    const py=(L.y+view.oy)*s[1]*innerHeight*dpr;
+    if(px<RAIL()*dpr-40||px>labcv.width+40||py<0||py>labcv.height)continue;
+    const size=(9.5+3.2*Math.log2(Math.max(1,L.n/70)))*dpr;
     ctx.font=`600 ${size}px 'Barlow Condensed',sans-serif`;
     const w=ctx.measureText(up).width;
     const box=[px-w/2-6,py-size,px+w/2+6,py+4];
@@ -399,7 +457,8 @@ function drawMini(s){
 }
 mini.onclick=e=>{
   const r=mini.getBoundingClientRect();
-  const wx=(e.clientX-r.left-2)/146, wy=(e.clientY-r.top-2)/146;
+  const k=150/(r.width-2); // 150 backing px per CSS content px (1px border each side); k==1 on desktop => exact v13 formula
+  const wx=((e.clientX-r.left-1)*k-1)/146, wy=((e.clientY-r.top-1)*k-1)/146;
   const s=ascale(targ.zoom);
   const cxs=(RAIL()/innerWidth+1)/2;
   targ.ox=cxs/s[0]-wx;targ.oy=0.5/s[1]-wy;req();
@@ -458,25 +517,25 @@ function updateCards(s){
       el.addEventListener('mousedown',ev=>{if(!ev.shiftKey){dragging=true;moved=false;lx=ev.clientX;ly=ev.clientY;cv.classList.add('drag');}});
       el.addEventListener('click',ev=>{if(!moved&&!ev.shiftKey)window.open('https://scryfall.com/search?q='+encodeURIComponent('!"'+D.names[idx]+'"'),'_blank');});
       imgLayer.appendChild(el);e={el};pool.set(o.i,e);}
-    e.el.style.width=W+'px';e.el.style.left=o.x+'px';e.el.style.top=o.y+'px';
+    e.el.style.width=W+'px';e.el.style.left=o.x+'px';e.el.style.top=o.y+'px';e.x=o.x;e.y=o.y;e.w=W;
   }
 }
 
 let clLast='';
 function updateCardList(want){
   const el=document.getElementById('clist');
-  if(!want.length||want.length>100){el.style.display='none';clLast='';return;}
+  if(!want.length||want.length>100){el.style.display='none';clLast='';mobSyncPill();return;}
   el.style.display='block';
   const sorted=[...want].sort((a,b)=>D.names[a].localeCompare(D.names[b]));
   const key=sorted.join(',');
-  document.getElementById('cln').textContent=sorted.length+' cards here';
+  document.getElementById('cln').textContent=sorted.length+' cards here';mobSyncPill();
   if(key===clLast)return;
   clLast=key;
   const rows=document.getElementById('clrows');rows.innerHTML='';
   for(const i of sorted){
     const d=document.createElement('div');
     d.innerHTML='<i style="background:'+ptHex[i]+'"></i>'+D.names[i];
-    d.onclick=()=>window.open('https://scryfall.com/search?q='+encodeURIComponent('!"'+D.names[i]+'"'),'_blank');
+    d.onclick=()=>{if(isMob){showCardSheet(i);return;}window.open('https://scryfall.com/search?q='+encodeURIComponent('!"'+D.names[i]+'"'),'_blank');};
     rows.appendChild(d);
   }
   const names=()=>sorted.map(i=>'1 '+D.names[i]).join('\n');
@@ -779,33 +838,103 @@ cv.addEventListener('dblclick',e=>{
   e.preventDefault();clearTimeout(clickT);clickT=null;
   zoomAt(e.clientX/innerWidth,e.clientY/innerHeight,e.altKey?1/2.3:2.3);
 });
-let touches=new Map(),pinch0=null;
+// ---- touch: one-finger pan, two-finger pinch (zoomAt = the wheel-to-cursor math, anchored at the
+// LIVE pinch midpoint), plus mobile-only tap-select and double-tap zoom. Box zoom / Shift stay desktop-only.
+const touches=new Map();let pinch=null,tapStart=null,tapT=null,lastTap=null;
+function panBy(dx,dy){const s=ascale(view.zoom);
+  view.ox+=dx/innerWidth/s[0];view.oy+=dy/innerHeight/s[1];targ.ox=view.ox;targ.oy=view.oy;}
+function tvals(){return[...touches.values()];}
 cv.addEventListener('touchstart',e=>{e.preventDefault();
-  for(const t of e.changedTouches)touches.set(t.identifier,{x:t.clientX,y:t.clientY});
-  if(touches.size===2){const[a,b]=[...touches.values()];
-    pinch0={d:Math.hypot(a.x-b.x,a.y-b.y),zoom:targ.zoom,
-      cx:(a.x+b.x)/2/innerWidth,cy:(a.y+b.y)/2/innerHeight};}
+  for(const t of e.changedTouches)touches.set(t.identifier,{x:t.clientX,y:t.clientY,px:t.clientX,py:t.clientY});
+  if(touches.size===1){const o=tvals()[0];tapStart={x:o.x,y:o.y,t:performance.now(),moved:false};pinch=null;}
+  else{tapStart=null;clearTimeout(tapT);tapT=null;
+    if(touches.size===2){const[a,b]=tvals();pinch={d:Math.hypot(a.x-b.x,a.y-b.y),mx:(a.x+b.x)/2,my:(a.y+b.y)/2};}
+    else pinch=null;}
 },{passive:false});
 cv.addEventListener('touchmove',e=>{e.preventDefault();
-  for(const t of e.changedTouches){const o=touches.get(t.identifier);
-    if(o){o.nx=t.clientX;o.ny=t.clientY;}}
-  if(touches.size===1){const o=[...touches.values()][0];
-    if(o.nx!==undefined){const s=ascale(view.zoom);
-      view.ox+=(o.nx-o.x)/innerWidth/s[0];view.oy+=(o.ny-o.y)/innerHeight/s[1];
-      targ.ox=view.ox;targ.oy=view.oy;o.x=o.nx;o.y=o.ny;req();}}
-  else if(touches.size===2&&pinch0){const[a,b]=[...touches.values()];
-    const ax=a.nx??a.x,ay=a.ny??a.y,bx=b.nx??b.x,by=b.ny??b.y;
-    const d=Math.hypot(ax-bx,ay-by),f=d/pinch0.d;
-    const s0=ascale(view.zoom);
-    const wx=pinch0.cx/s0[0]-view.ox,wy=pinch0.cy/s0[1]-view.oy;
-    view.zoom=targ.zoom=Math.max(.5,Math.min(400,pinch0.zoom*f));
-    const s1=ascale(view.zoom);
-    view.ox=targ.ox=pinch0.cx/s1[0]-wx;view.oy=targ.oy=pinch0.cy/s1[1]-wy;req();}
+  for(const t of e.changedTouches){const o=touches.get(t.identifier);if(o){o.x=t.clientX;o.y=t.clientY;}}
+  if(touches.size===1){const o=tvals()[0];
+    if(tapStart&&!tapStart.moved&&Math.hypot(o.x-tapStart.x,o.y-tapStart.y)>8)tapStart.moved=true;
+    panBy(o.x-o.px,o.y-o.py);o.px=o.x;o.py=o.y;req();}
+  else if(touches.size===2&&pinch){const[a,b]=tvals();
+    const mx=(a.x+b.x)/2,my=(a.y+b.y)/2,d=Math.hypot(a.x-b.x,a.y-b.y);
+    panBy(mx-pinch.mx,my-pinch.my);                              // world point under the midpoint follows the fingers…
+    zoomAt(mx/innerWidth,my/innerHeight,d/Math.max(1,pinch.d)); // …then scale about the live midpoint (wheel math)
+    view.zoom=targ.zoom;view.ox=targ.ox;view.oy=targ.oy;          // immediate mid-gesture, no easing
+    pinch.d=d;pinch.mx=mx;pinch.my=my;a.px=a.x;a.py=a.y;b.px=b.x;b.py=b.y;req();}
 },{passive:false});
-cv.addEventListener('touchend',e=>{
+function touchEnd(e){
   for(const t of e.changedTouches)touches.delete(t.identifier);
-  if(touches.size<2)pinch0=null;
-},{passive:false});
+  if(touches.size===1){const o=tvals()[0];o.px=o.x;o.py=o.y;pinch=null;tapStart=null;return;} // pinch→pan handoff, no jump
+  if(touches.size>0)return;
+  pinch=null;
+  const ts=tapStart;tapStart=null;
+  if(!ts||ts.moved||performance.now()-ts.t>350||!isMob)return;
+  const now=performance.now();
+  if(lastTap&&now-lastTap.t<300&&Math.hypot(ts.x-lastTap.x,ts.y-lastTap.y)<30){   // double-tap: ~2x toward the tap
+    clearTimeout(tapT);tapT=null;lastTap=null;hideCardSheet();
+    zoomAt(ts.x/innerWidth,ts.y/innerHeight,2);return;}
+  lastTap={x:ts.x,y:ts.y,t:now};
+  clearTimeout(tapT);tapT=setTimeout(()=>{tapT=null;lastTap=null;onTap(ts.x,ts.y);},230);
+}
+cv.addEventListener('touchend',touchEnd,{passive:false});
+cv.addEventListener('touchcancel',e=>{for(const t of e.changedTouches)touches.delete(t.identifier);pinch=null;tapStart=null;},{passive:false});
+function onTap(x,y){
+  if(Math.abs(view.t-Math.round(view.t))>0.02)return;
+  let i=pickCardImg(x,y);if(i<0)i=pickAt(x,y,1.6);      // touch: 1.6x the desktop picking radius
+  if(i>=0)showCardSheet(i);else hideCardSheet();          // never navigates; Scryfall is an explicit button
+}
+
+// ---- mobile chrome: lens chip strip (top), rail + card-list bottom sheets, tap-select card sheet
+function applyMob(){
+  isMob=calcMob();
+  document.body.classList.toggle('mob',isMob);
+  const lb=document.getElementById('lensbar');
+  if(isMob){if(!mobBuilt)buildMobUI();document.getElementById('lensstrip').appendChild(lb);}
+  else if(mobBuilt){document.getElementById('lenslbl').after(lb);closeSheets();hideCardSheet();}
+  mobSyncPill();
+}
+function buildMobUI(){
+  mobBuilt=true;
+  const rail=document.getElementById('rail'),clist=document.getElementById('clist');
+  document.getElementById('mmenu').onclick=()=>rail.classList.contains('open')?closeSheets():openSheet(rail);
+  document.getElementById('mpill').onclick=()=>clist.classList.contains('open')?closeSheets():openSheet(clist);
+  document.getElementById('scrim').onclick=closeSheets;
+  document.getElementById('csx').onclick=hideCardSheet;
+  document.querySelectorAll('.shandle').forEach(h=>dragHandle(h,h.parentNode));
+}
+function openSheet(el){hideCardSheet();
+  for(const id of['rail','clist'])document.getElementById(id).classList.remove('open');
+  el.classList.add('open');document.getElementById('scrim').classList.add('on');}
+function closeSheets(){for(const id of['rail','clist'])document.getElementById(id).classList.remove('open');
+  document.getElementById('scrim').classList.remove('on');}
+function dragHandle(h,sheet){let y0=null,dy=0;
+  h.addEventListener('touchstart',e=>{y0=e.touches[0].clientY;dy=0;sheet.style.transition='none';},{passive:true});
+  h.addEventListener('touchmove',e=>{if(y0===null)return;dy=Math.max(0,e.touches[0].clientY-y0);sheet.style.transform='translateY('+dy+'px)';},{passive:true});
+  const end=()=>{if(y0===null)return;sheet.style.transition='';sheet.style.transform='';if(dy>80)closeSheets();y0=null;};
+  h.addEventListener('touchend',end,{passive:true});h.addEventListener('touchcancel',end,{passive:true});}
+function mobSyncPill(){
+  if(!mobBuilt)return;
+  const cl=document.getElementById('clist'),pill=document.getElementById('mpill');
+  const avail=isMob&&cl.style.display==='block';
+  pill.style.display=avail?'':'none';
+  pill.textContent=document.getElementById('cln').textContent||'cards here';
+  if(!avail&&cl.classList.contains('open'))closeSheets();
+}
+function showCardSheet(i){
+  if(!mobBuilt)return;
+  const cs=document.getElementById('csheet'),d=dashID(i);
+  const im=document.getElementById('csimg');im.style.visibility='';
+  im.src='https://cards.scryfall.io/small/front/'+d[0]+'/'+d[1]+'/'+d+'.jpg';
+  document.getElementById('csnm').textContent=D.names[i];
+  document.getElementById('cstl').textContent=D.sets[i].toUpperCase()+' · MV '+D.cmc[i];
+  const dots=document.getElementById('csdots');dots.innerHTML='';
+  const idn=D.idn[i],bits=[1,2,4,8,16].filter(b=>idn&b);
+  for(const b of(bits.length?bits:[0])){const el=document.createElement('i');el.style.background=b?IDHEX[b]:GRAY;dots.appendChild(el);}
+  document.getElementById('csopen').onclick=()=>window.open('https://scryfall.com/search?q='+encodeURIComponent('!"'+D.names[i]+'"'),'_blank');
+  cs.classList.add('open');
+}
+function hideCardSheet(){const cs=document.getElementById('csheet');if(cs)cs.classList.remove('open');}
 addEventListener('keydown',e=>{
   if(e.target.tagName==='INPUT'){if(e.key==='Escape')e.target.blur();return;}
   if(e.key==='f'||e.key==='F'){let any=false;
@@ -824,18 +953,32 @@ document.getElementById('keyshd').onclick=()=>{
 const tip=document.getElementById('tip'),tnm=tip.querySelector('.nm'),
 ttl=tip.querySelector('.tl'),timg=tip.querySelector('img');
 let hovered=-1,imgT=null;
-function hover(e){
-  if(e.target!==cv){tip.style.display='none';hovered=-1;return;}
-  if(Math.abs(view.t-Math.round(view.t))>0.02){tip.style.display='none';hovered=-1;return;}
+// picking helpers (shared by mouse hover and touch tap). pickAt with radMul=1 is the exact v13 hover math.
+function pickAt(cx,cy,radMul){
   const s=ascale(view.zoom);
-  const wx=e.clientX/innerWidth/s[0]-view.ox,wy=e.clientY/innerHeight/s[1]-view.oy;
-  const li=lensIdx(),a=sprAmt(),rad=0.014/view.zoom;let best=-1,bd=rad*rad;
+  const wx=cx/innerWidth/s[0]-view.ox,wy=cy/innerHeight/s[1]-view.oy;
+  const li=lensIdx(),a=sprAmt(),rad=(0.014/view.zoom)*radMul;let best=-1,bd=rad*rad;
   // grid is pos-keyed; drawn positions are blended — pad the query by the blend bound
   const pad=rad+a*SPREAD_CAP;
   gridQuery(POS[li],wx-pad,wy-pad,wx+pad,wy+pad,i=>{
     if(!visible[i])return false;
     const dx=epx(li,i,a)-wx,dy=epy(li,i,a)-wy,d=dx*dx+dy*dy;
     if(d<bd){bd=d;best=i;}return false;});
+  return best;
+}
+// card-image hit test for touch: images are pointer-events:none, so test the pool's screen rects.
+// Pool iteration order == DOM order == paint order, so the LAST hit is the topmost card: tap what you see.
+function pickCardImg(cx,cy){
+  if(imgLayer.style.display==='none')return -1;
+  let best=-1;
+  for(const[i,o]of pool){if(o.w===undefined)continue;
+    if(Math.abs(cx-o.x)<=o.w/2&&Math.abs(cy-o.y)<=o.w*0.7)best=i;}
+  return best;
+}
+function hover(e){
+  if(e.target!==cv){tip.style.display='none';hovered=-1;return;}
+  if(Math.abs(view.t-Math.round(view.t))>0.02){tip.style.display='none';hovered=-1;return;}
+  const best=pickAt(e.clientX,e.clientY,1);
   if(best<0){tip.style.display='none';hovered=-1;return;}
   if(best!==hovered){hovered=best;
     tnm.textContent=D.names[best];
