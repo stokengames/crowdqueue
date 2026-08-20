@@ -231,8 +231,10 @@ Zoom close — points become cards
 // bottom sheets for the rail + card list, DPR cap on mobile. v13 desktop behaviour is unchanged.
 const D=MAPDATA,N=D.n,LENSES=D.lenses,FRIENDLY=D.friendly;
 // ---- mobile mode: coarse pointer OR narrow viewport. Desktop (fine pointer, >=900px) is untouched.
-const MOBQ=matchMedia('(pointer:coarse)');
-function calcMob(){return MOBQ.matches||innerWidth<900;}
+const MOBQ=matchMedia('(pointer:coarse)'),FINEQ=matchMedia('(any-pointer:fine)');
+// mobile = truly narrow, OR touch-only (no fine pointer anywhere: no pen/trackpad/mouse) and not desktop-wide.
+// Windows tablets and convertibles report pointer:coarse but expose any-pointer:fine — they stay desktop.
+function calcMob(){return innerWidth<900||(MOBQ.matches&&!FINEQ.matches&&innerWidth<1200);}
 let isMob=calcMob(),mobBuilt=false;
 const RAIL=()=>isMob?0:(innerWidth<=760?232:282);
 // devicePixelRatio, capped at 2 on mobile for battery; raw on desktop (unchanged behaviour)
@@ -321,6 +323,7 @@ gl.viewport(0,0,cv.width,cv.height);
 document.getElementById('mini').style.left=(RAIL()+14)+'px';req();}
 addEventListener('resize',resize);
 if(MOBQ.addEventListener)MOBQ.addEventListener('change',resize);
+if(FINEQ.addEventListener)FINEQ.addEventListener('change',resize);
 function ascale(z){const a=innerWidth/innerHeight;return a>1?[z/a,z]:[z,z*a];}
 function sprAmt(){const z=view.zoom;return Math.max(0,Math.min(1,(z-6)/4));}
 // Effective (drawn) position = pos blended toward spread by sprAmt — matches the shader
