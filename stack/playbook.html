@@ -286,7 +286,10 @@ document.getElementById('src').textContent='EDHREC snapshot '+DATA.snapshot+' ·
 const h=parseHash(); go(h.id&&bySlug[h.id]?h.id:slugOf(IDS.find(x=>x.name==='Mono-White')||IDS[0]),h.plan,false);
 /* ---- v2 mobile pass. body.mob = coarse pointer OR <900px; desktop (fine pointer, >=900px) unchanged. ---- */
 const MOBQ=matchMedia('(pointer:coarse)');
-const calcMob=()=>MOBQ.matches||innerWidth<900;
+const FINEQ=matchMedia('(any-pointer:fine)');
+// mobile = truly narrow, OR touch-only (no fine pointer anywhere: no pen/trackpad/mouse) and not desktop-wide.
+// Windows tablets and convertibles report pointer:coarse but expose any-pointer:fine — they stay desktop.
+const calcMob=()=>innerWidth<900||(MOBQ.matches&&!FINEQ.matches&&innerWidth<1200);
 var isMob=false;   // var: hoisted so the boot render() sees undefined (falsy) instead of a TDZ throw
 const railEl=document.getElementById('rail'),scrimEl=document.getElementById('scrim');
 function openSheet(){railEl.classList.add('open');scrimEl.classList.add('on');}
@@ -329,6 +332,7 @@ function applyMob(){const m=calcMob();if(m===isMob)return;isMob=m;
   if(!m)closeSheets();syncChips();if(cur)render();}
 addEventListener('resize',applyMob);
 if(MOBQ.addEventListener)MOBQ.addEventListener('change',applyMob);
+if(FINEQ.addEventListener)FINEQ.addEventListener('change',applyMob);
 applyMob();syncChips();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "9564eddc0355441dbd1c9bbf7fece984"}'></script><!-- End Cloudflare Web Analytics -->

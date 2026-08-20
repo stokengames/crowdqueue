@@ -496,7 +496,10 @@ $('exportBtn').onclick=()=>{
 addEventListener('resize',()=>{if(plan&&!anim){layout(plan);resetView();drawView(plan);}});
 /* ---- v2 mobile pass. body.mob = coarse pointer OR <900px; desktop (fine pointer, >=900px) unchanged. ---- */
 const MOBQ=matchMedia('(pointer:coarse)');
-const calcMob=()=>MOBQ.matches||innerWidth<900;
+const FINEQ=matchMedia('(any-pointer:fine)');
+// mobile = truly narrow, OR touch-only (no fine pointer anywhere: no pen/trackpad/mouse) and not desktop-wide.
+// Windows tablets and convertibles report pointer:coarse but expose any-pointer:fine — they stay desktop.
+const calcMob=()=>innerWidth<900||(MOBQ.matches&&!FINEQ.matches&&innerWidth<1200);
 let isMob=false;
 const railEl=$('rail'),scrimEl=$('scrim'),tsheet=$('tsheet');
 function openSheet(){railEl.classList.add('open');scrimEl.classList.add('on');}
@@ -527,6 +530,7 @@ function applyMob(){const m=calcMob();if(m===isMob)return;isMob=m;
   if(plan&&!anim){layout(plan);resetView();drawView(plan);}}
 addEventListener('resize',applyMob);
 if(MOBQ.addEventListener)MOBQ.addEventListener('change',applyMob);
+if(FINEQ.addEventListener)FINEQ.addEventListener('change',applyMob);
 applyMob();
 // touch: one-finger pan, pinch anchored at the live midpoint (the wheel zoom-to-cursor math), double-tap zoom, tap -> tile sheet
 const touches=new Map();let pinch=null,tapStart=null,tapT=null,lastTap=null;
