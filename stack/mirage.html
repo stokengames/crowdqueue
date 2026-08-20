@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover">
-<title>Mirror Gallery — the card-art mosaic · stoken·games</title>
-<meta property="og:title" content="Mirror Gallery — the card-art mosaic">
-<meta property="og:description" content="The Magic: the Gathering card-art mosaic.">
+<title>Mirror Gallery: the card-art mosaic · stoken·games</title>
+<meta property="og:title" content="Mirror Gallery: the card-art mosaic">
+<meta property="og:description" content="The Magic the Gathering card-art mosaic.">
 <meta property="og:image" content="https://stoken.games/stack/hero-mirror-gallery.png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Nunito:wght@400;700&display=swap');
@@ -74,7 +74,7 @@ body.mob #tsheet.open{visibility:visible;transform:none;transition:transform .28
   <div class="shandle"></div>
   <div class="brand">stoken<b>·</b>games</div>
   <h1>MIRROR <span class="cy">GALLERY</span></h1>
-  <div class="sub">the card-art mosaic — any card, rebuilt from every card</div>
+  <div class="sub">the card-art mosaic: any card, rebuilt from every card</div>
 
   <div class="lbl">Card</div>
   <div class="ac"><input id="q" type="text" placeholder="e.g. Ugin, the Spirit Dragon" autocomplete="off"><div class="dd" id="qd"></div></div>
@@ -103,7 +103,7 @@ body.mob #tsheet.open{visibility:visible;transform:none;transition:transform .28
   </div>
 </div>
 <div id="stage"><canvas id="cv"></canvas></div>
-<div id="hint">type a card name — the cards do the rest</div>
+<div id="hint">type a card name. The cards do the rest</div>
 <button id="mfab" aria-label="Open controls">⚙ Assemble</button>
 <button id="mreplay" aria-label="Replay assembly">↻</button>
 <div id="scrim"></div>
@@ -122,7 +122,7 @@ const pip=new Image();pip.crossOrigin='anonymous';let pipOK=false;
 pip.onload=()=>pipOK=true;pip.onerror=()=>pipOK=false;
 pip.src='https://stoken.games/images/pip-default.png';
 let sheet=new Image();
-sheet.onload=()=>{status('Library ready — <b>'+SHEETMETA.tiles.length+'</b> card arts loaded. Pick a card.');checkReady();};
+sheet.onload=()=>{status('Library ready: <b>'+SHEETMETA.tiles.length+'</b> card arts loaded. Pick a card.');checkReady();};
 sheet.src='data:image/jpeg;base64,'+SHEET_B64;
 
 // ---------- autocomplete ----------
@@ -168,7 +168,7 @@ async function pick(name){
       if(i===0){b.classList.add('on');selPrint=p;}
       box.appendChild(b);
     });
-    status('<b>'+c.name+'</b> — '+prints.length+' printings. Pick a version, then assemble.');
+    status('<b>'+c.name+'</b>: '+prints.length+' printings. Pick a version, then assemble.');
     checkReady();
   }catch(e){status('Could not find that card ('+e.message+').');}
 }
@@ -420,7 +420,7 @@ function animate(p,cp){
     else{anim=null;$('exportBtn').style.display='';$('replayBtn').style.display='';
       mobSyncFabs();
       resetView();drawView(p);
-      status(status0+(isMob?' <span style="color:#777">Pinch to zoom — tap a tile for its card.</span>':' <span style="color:#777">Scroll to zoom — up close, every card shows itself. Hover for names, click for Scryfall.</span>'));}
+      status(status0+(isMob?' <span style="color:#777">Pinch to zoom. Tap a tile for its card.</span>':' <span style="color:#777">Scroll to zoom. Up close, every card shows itself. Hover for names, click for Scryfall.</span>'));}
   };
   anim=requestAnimationFrame(step);
 }
@@ -434,7 +434,7 @@ $('go').onclick=async()=>{
     await new Promise(r=>setTimeout(r,30));   // let status paint
     plan=computePlan(art,+$('cells').value);
     const cp=layout(plan);
-    status0='<b>'+(selCard?selCard.name:'your art')+'</b> — '+plan.cells.length+' cards, '+plan.distinct+' distinct arts.';
+    status0='<b>'+(selCard?selCard.name:'your art')+'</b>: '+plan.cells.length+' cards, '+plan.distinct+' distinct arts.';
     status(status0);
     resetView();animate(plan,cp);
   }catch(e){status('That didn\'t work: '+e.message);}

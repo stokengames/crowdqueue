@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover">
-<title>Tome of Legends — the Commander playbook · stoken·games</title>
-<meta property="og:title" content="Tome of Legends — the Commander playbook">
-<meta property="og:description" content="The Commander playbook for Magic: the Gathering.">
+<title>Tome of Legends: the Commander playbook · stoken·games</title>
+<meta property="og:title" content="Tome of Legends: the Commander playbook">
+<meta property="og:description" content="The Commander playbook for Magic the Gathering.">
 <meta property="og:image" content="https://stoken.games/stack/hero-tome-of-legends.png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Nunito:wght@400;700&display=swap');
@@ -150,7 +150,7 @@ body.mob #csheet.open{visibility:visible;transform:none;transition:transform .28
   <div class="shandle"></div>
   <div class="brand">stoken<b>·</b>games</div>
   <h1>TOME OF <span class="cy">LEGENDS</span></h1>
-  <div class="sub">the Commander playbook — what each color identity actually plays</div>
+  <div class="sub">the Commander playbook: what each color identity actually plays</div>
   <div class="countrow"><span class="count"><span id="nid">32</span><small>identities</small></span>
     <button id="share" title="copy a link to exactly this view">⧉ copy view</button></div>
   <div id="nav"></div>
@@ -226,7 +226,7 @@ function insight(i){
   const n=i.overlap.plans.length,m=i.overlap.matrix;let best=0,pa=null,pb=null;
   for(let a=0;a<n;a++)for(let b=a+1;b<n;b++)if(m[a][b]>best){best=m[a][b];pa=i.overlap.plans[a];pb=i.overlap.plans[b]}
   if(best>=.3)s+=` Closest cousins: <b>${pa}</b> and <b>${pb}</b> share ${Math.round(best*100)}% of their distinctive cards.`;
-  else if(pa)s+=` Its plans keep to themselves — no pair shares more than ${Math.round(best*100)}% of its distinctive cards.`;
+  else if(pa)s+=` Its plans keep to themselves: no pair shares more than ${Math.round(best*100)}% of its distinctive cards.`;
   return s;
 }
 function render(){
@@ -235,7 +235,7 @@ function render(){
   const idx=IDS.indexOf(i),prev=IDS[(idx-1+IDS.length)%IDS.length],next=IDS[(idx+1)%IDS.length];
   main.innerHTML=`
   <div class="idhead">${pips(i.ci)}<h2>${i.name}</h2><span class="letters">${i.ci||'C'}</span></div>
-  <div class="verdict">Data verdict basis: <b>${i.n_commanders}</b> of the top-500 commanders have this identity · combined deck pool ≈ <b>${fmt(i.id_pool_proxy)}</b> decks (top-staple proxy) · EDHREC snapshot ${DATA.snapshot}${i.n_commanders<4?' · <b style="color:#e0b34a">small sample — read as provisional</b>':''}</div>
+  <div class="verdict">Data verdict basis: <b>${i.n_commanders}</b> of the top-500 commanders have this identity · combined deck pool ≈ <b>${fmt(i.id_pool_proxy)}</b> decks (top-staple proxy) · EDHREC snapshot ${DATA.snapshot}${i.n_commanders<4?' · <b style="color:#e0b34a">small sample; read as provisional</b>':''}</div>
   <div class="insight">${insight(i)}</div>
   <div class="seclbl">Plans, ranked<small>merged EDHREC tags · deck counts are themed-deck totals</small></div>
   <div id="plans">${i.plans.map((p,ix)=>`
@@ -246,8 +246,8 @@ function render(){
       <span class="tag">${p.core?'core':'tail'}</span>
     </div>`).join('')}</div>
   <div id="detail">
-    <h3>${plan.plan} <span class="cy">— the 10 cards that make it different</span></h3>
-    <div class="dmeta">Ranked by <b>lift</b> vs the ${i.name} baseline — how many times more often the card shows up in ${plan.plan} decks than in ${i.name} decks at large. From ${plan.n_commanders} commander page${plan.n_commanders>1?'s':''} tagged ${plan.plan}.</div>
+    <h3>${plan.plan}<span class="cy">: the 10 cards that make it different</span></h3>
+    <div class="dmeta">Ranked by <b>lift</b> vs the ${i.name} baseline: how many times more often the card shows up in ${plan.plan} decks than in ${i.name} decks at large. From ${plan.n_commanders} commander page${plan.n_commanders>1?'s':''} tagged ${plan.plan}.</div>
     <div class="cards">${plan.cards.map((c,ci)=>`
       <a class="card" data-ci="${ci}" href="${c.uri||'#'}" target="_blank" rel="noopener">
         <span class="lift">×${c.lift}</span>
@@ -258,17 +258,17 @@ function render(){
     <div class="tcoms">${plan.top_commanders.map(c=>`
       <span class="tcom">${c.img?`<img loading="lazy" src="${c.img}" onerror="this.remove()">`:''}<span><b>${c.name}</b><br>${fmt(c.decks)} themed decks</span></span>`).join('')}</div>
   </div>
-  <div class="seclbl">Plan overlap<small>% of each plan's 60 most distinctive cards shared with the other plan — high = same deck, different name</small></div>
+  <div class="seclbl">Plan overlap<small>% of each plan's 60 most distinctive cards shared with the other plan (high = same deck, different name)</small></div>
   <div class="omwrap" style="overflow-x:auto"><table class="om"><tr><th></th>${i.overlap.plans.map(p=>`<th class="col"><span>${p}</span></th>`).join('')}</tr>
   ${i.overlap.plans.map((a,r)=>`<tr><th class="row">${a}</th>${i.overlap.matrix[r].map((v,c)=>
-     r===c?`<td class="diag">–</td>`:`<td class="oc" data-a="${a}" data-b="${i.overlap.plans[c]}" data-v="${v}" style="background:${heat(v)}"${isMob?'':` title="${a} ∩ ${i.overlap.plans[c]}: ${Math.round(v*100)}%"`}>${Math.round(v*100)}</td>`).join('')}</tr>`).join('')}
+     r===c?`<td class="diag">·</td>`:`<td class="oc" data-a="${a}" data-b="${i.overlap.plans[c]}" data-v="${v}" style="background:${heat(v)}"${isMob?'':` title="${a} ∩ ${i.overlap.plans[c]}: ${Math.round(v*100)}%"`}>${Math.round(v*100)}</td>`).join('')}</tr>`).join('')}
   </table></div>
   <div class="navpn"><button id="pv">← ${prev.name}</button><button id="nx">${next.name} →</button></div>
   <div class="method">
     <h4>How this is computed</h4>
-    <p><b>Plans</b> are EDHREC theme tags aggregated across every top-500 commander of the identity, after a <b>merge-and-spread</b> pass: style descriptors (Combo, Aggro, Control, Midrange…) are excluded, and relabels are merged (Sacrifice→Aristocrats, Landfall→Lands&nbsp;Matter, Cantrips→Spellslinger…). A plan is <b>core</b> if it has ≥25% of the dominant plan's decks. Deck counts are EDHREC themed-deck totals — absolute counts drift between EDHREC cache snapshots; ordering is stable.</p>
+    <p><b>Plans</b> are EDHREC theme tags aggregated across every top-500 commander of the identity, after a <b>merge-and-spread</b> pass: style descriptors (Combo, Aggro, Control, Midrange…) are excluded, and relabels are merged (Sacrifice→Aristocrats, Landfall→Lands&nbsp;Matter, Cantrips→Spellslinger…). A plan is <b>core</b> if it has ≥25% of the dominant plan's decks. Deck counts are EDHREC themed-deck totals; absolute counts drift between EDHREC cache snapshots; ordering is stable.</p>
     <p><b>Defining cards</b>: each commander's card list is weighted by that commander's themed-deck count for the plan; a card's plan inclusion is compared against the identity-wide baseline. Lift ×3 = three times more common in the plan than in the identity at large. Cards must appear in ≥8% of plan-weighted decks${''} and on ≥2 tagged commanders' pages. EDHREC pages list only each commander's top ~300 cards, so inclusion is measured on that truncated view.</p>
-    <p><b>Overlap</b> compares each pair of plans by their 60 most distinctive (lift-ranked) cards — shared staples like Sol Ring are deliberately out of scope.</p>
+    <p><b>Overlap</b> compares each pair of plans by their 60 most distinctive (lift-ranked) cards. Shared staples like Sol Ring are deliberately out of scope.</p>
     <details class="mm"><summary>Full merge map & exclusions</summary><div id="mm"></div></details>
     <p style="margin-top:10px">Source: ${DATA.generated_from}. Migration trends land once ≥3 monthly snapshots exist.</p>
   </div>`;
@@ -313,7 +313,7 @@ function showCS(c){const im=document.getElementById('csimg');im.src=c.img||'';im
 function hideCS(){cs.classList.remove('open');}
 document.getElementById('csx').onclick=hideCS;
 const ompop=document.getElementById('ompop');
-function showOm(a,b,v){hideCS();document.getElementById('omtxt').innerHTML='<b>'+a+'</b> ∩ <b>'+b+'</b> — '+Math.round(v*100)+'% · ≈'+Math.round(v*60)+' of each plan\'s 60 distinctive cards shared';ompop.classList.add('on');}
+function showOm(a,b,v){hideCS();document.getElementById('omtxt').innerHTML='<b>'+a+'</b> ∩ <b>'+b+'</b>: '+Math.round(v*100)+'% · ≈'+Math.round(v*60)+' of each plan\'s 60 distinctive cards shared';ompop.classList.add('on');}
 function hideOm(){ompop.classList.remove('on');}
 ompop.querySelector('.opx').onclick=hideOm;
 document.getElementById('main').addEventListener('click',e=>{

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Apex Observatory — the data dashboard · stoken·games</title>
-<meta property="og:title" content="Apex Observatory — the data dashboard">
-<meta property="og:description" content="The Magic: the Gathering data dashboard.">
+<title>Apex Observatory: the data dashboard · stoken·games</title>
+<meta property="og:title" content="Apex Observatory: the data dashboard">
+<meta property="og:description" content="The Magic the Gathering data dashboard.">
 <meta property="og:image" content="https://stoken.games/stack/hero-apex-observatory.png">
 <script>/**
  * Skipped minification because the original files appears to be already minified.
@@ -85,12 +85,12 @@ body.simple .story{display:block}
 
 <div class="grid">
 
-<div class="card w12" style="background:none;border:none;box-shadow:none;padding:6px 0 0"><h2 style="color:var(--cyan)">ACT I — HOW THE CARDS CHANGED</h2></div>
+<div class="card w12" style="background:none;border:none;box-shadow:none;padding:6px 0 0"><h2 style="color:var(--cyan)">ACT I: HOW THE CARDS CHANGED</h2></div>
 <!-- 1 · KEYWORD PREVALENCE -->
 <div class="card w12">
   <div class="eyebrow">Analysis 01 · card pool</div>
   <h2>KEYWORD PREVALENCE OVER TIME</h2>
-  <div class="note">% of each year's <em>new</em> cards (first printings) carrying the keyword. Toggle keywords below — watch Ward get born in 2021 and Banding flatline.</div>
+  <div class="note">% of each year's <em>new</em> cards (first printings) carrying the keyword. Toggle keywords below and watch Ward get born in 2021 and Banding flatline.</div>
   <div class="chartbox" style="height:330px"><canvas id="cKw"></canvas></div>
   <div class="chips" id="kwChips"></div><div class="story">The story: mechanics are born, live, and die. Ward appeared in 2021 and now rides on new cards every year; Banding has not been printed since the 90s. Every line here is a design era.</div>
 </div>
@@ -101,13 +101,13 @@ body.simple .story{display:block}
   <h2>CREATURE STAT EFFICIENCY</h2>
   <div class="note">Median (power+toughness) ÷ mana value of each year's new creatures. Higher = more stats per mana.</div>
   <div class="chartbox"><canvas id="cPT"></canvas></div>
-  <div class="chips" id="ptChips"></div><div class="story">The story: creatures got better. A 1994 creature gave you about 1.3 stats per mana; today it is about 1.7 — and green gets the best deals. That is power creep, measured.</div>
+  <div class="chips" id="ptChips"></div><div class="story">The story: creatures got better. A 1994 creature gave you about 1.3 stats per mana; today it is about 1.7, and green gets the best deals. That is power creep, measured.</div>
 </div>
 <div class="card">
   <div class="eyebrow">Analysis 02 · power creep, quantified</div>
   <h2>COMPLEXITY &amp; LEGENDS</h2>
   <div class="note">Median rules-text length (chars) and % of new cards that are legendary. The legend-ification of Magic is dramatic.</div>
-  <div class="chartbox"><canvas id="cCx"></canvas></div><div class="story">The story: in 1994, 1 in 10 new cards was legendary. Today it is more than 1 in 4 — because Commander became the way most people play, and legends are what Commander runs on.</div>
+  <div class="chartbox"><canvas id="cCx"></canvas></div><div class="story">The story: in 1994, 1 in 10 new cards was legendary. Today it is more than 1 in 4, because Commander became the way most people play, and legends are what Commander runs on.</div>
 </div>
 
 <!-- 3 · COLOR PIE BLEED -->
@@ -132,11 +132,11 @@ body.simple .story{display:block}
 <div class="card w12 arch">
   <div class="eyebrow">Analysis 05 · archetypes by color combo</div>
   <h2>WHAT EACH COLOR PAIR ACTUALLY BUILDS</h2>
-  <div class="note">Most common deck plans (EDHREC tags in each commander's top 4) among the year's 100 most-built commanders, grouped by color identity. Full merge-and-spread treatment — the locked Flex methodology at field scale — runs on the complete 500-commander pull.</div>
+  <div class="note">Most common deck plans (EDHREC tags in each commander's top 4) among the year's 100 most-built commanders, grouped by color identity. Full merge-and-spread treatment: the locked Flex methodology at field scale, run on the complete 500-commander pull.</div>
   <div id="archGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:6px 22px"></div>
 </div>
 
-<div class="card w12 pro" style="background:none;border:none;box-shadow:none;padding:6px 0 0"><h2 style="color:var(--cyan)">ACT II — WHAT THE NUMBERS WHISPER</h2></div>
+<div class="card w12 pro" style="background:none;border:none;box-shadow:none;padding:6px 0 0"><h2 style="color:var(--cyan)">ACT II: WHAT THE NUMBERS WHISPER</h2></div>
 <!-- CORRELATION MATRIX -->
 <div class="card pro">
   <div class="eyebrow">Data science · association</div>
@@ -150,19 +150,19 @@ body.simple .story{display:block}
   <div class="eyebrow">Data science · honest diagnostics</div>
   <h2>WHAT THE DATA CAN'T SAY</h2>
   <div class="note" style="font-size:12px;color:#bbb;line-height:1.7">
-  <b>2026 is a partial year</b> — every "drop" in the rightmost point is calendar, not design. Charts end honestly; don't read the last point.<br>
+  <b>2026 is a partial year</b>: every "drop" in the rightmost point is calendar, not design. Charts end honestly; don't read the last point.<br>
   <b>"First printing" = earliest paper English release.</b> Promo pre-releases can pre-date sets by weeks; year-level analysis is unaffected.<br>
-  <b>Staples reflect the top-500 commander sample</b>, not all of EDHREC — popular commanders pull the numbers toward what popular decks play. Why does that matter? Players look up staples to copy them → the sample IS the meta they're copying → self-reinforcing, which is exactly why we state N on screen.<br>
+  <b>Staples reflect the top-500 commander sample</b>, not all of EDHREC; popular commanders pull the numbers toward what popular decks play. Why does that matter? Players look up staples to copy them → the sample IS the meta they're copying → self-reinforcing, which is exactly why we state N on screen.<br>
   <b>Legendary% tripled (9.9→28.3).</b> Five whys, condensed: more legends ← Commander is the growth engine ← every product needs face commanders ← legends sell packs ← WotC design incentives follow the format players actually play. The chart is a picture of Commander eating Magic.<br>
-  <b>Forecasts are naive linear fits</b> on 2013–2025 — trend illustration, not prediction. If legendary% really hit the projected ~31% by 2029, a third of all new cards would be legends.</div>
+  <b>Forecasts are naive linear fits</b> on 2013-2025: trend illustration, not prediction. If legendary% really hit the projected ~31% by 2029, a third of all new cards would be legends.</div>
 </div>
 
-<div class="card w12" style="background:none;border:none;box-shadow:none;padding:6px 0 0"><h2 style="color:var(--cyan)">ACT III — YOUR DECK, YOUR DATA</h2></div>
+<div class="card w12" style="background:none;border:none;box-shadow:none;padding:6px 0 0"><h2 style="color:var(--cyan)">ACT III: YOUR DECK, YOUR DATA</h2></div>
 <!-- CARD INSPECTOR -->
 <div class="card w12">
   <div class="eyebrow">Data science · look up your commander</div>
   <h2>CARD INSPECTOR</h2>
-  <div class="note">Type any card that shows up in the top-500 commander ecosystem: who plays it, how much, since when, and how combo-prone it is — with a one-click jump to its atlas neighborhood.</div>
+  <div class="note">Type any card that shows up in the top-500 commander ecosystem: who plays it, how much, since when, and how combo-prone it is, with a one-click jump to its atlas neighborhood.</div>
   <div class="ac" style="max-width:420px;position:relative"><input type="text" id="ciQ" placeholder="e.g. Krenko, Mob Boss" style="width:100%;background:#111;border:1px solid var(--line);border-radius:7px;color:var(--white);font-size:13px;padding:8px 10px;outline:none"><div id="ciD" style="position:absolute;left:0;right:0;top:calc(100% + 3px);background:#101010;border:1px solid #2c2c2c;border-radius:8px;z-index:20;max-height:220px;overflow-y:auto;display:none"></div></div>
   <div id="ciOut" style="display:none;margin-top:16px">
     <div style="display:flex;gap:22px;flex-wrap:wrap">
@@ -182,7 +182,7 @@ body.simple .story{display:block}
   <h2>ENDLESS ATLAS</h2>
   <div class="atlas">
     <div style="flex:1">
-      <div class="note" style="margin-top:4px;font-size:13px;color:#bbb">Every playable card mapped across six lenses — what it is, what it does, tribes, overall, deckmates, and combos. Interactive, zoomable, shareable. This is the clustering analysis, grown into a standalone tool.</div>
+      <div class="note" style="margin-top:4px;font-size:13px;color:#bbb">Every playable card mapped across six lenses: what it is, what it does, tribes, overall, deckmates, and combos. Interactive and shareable. This is the clustering analysis, grown into a standalone tool.</div>
     </div>
     <a href="card-atlas.html">Open the Atlas →</a>
   </div>
@@ -194,7 +194,7 @@ body.simple .story{display:block}
   <h2>TOME OF LEGENDS</h2>
   <div class="atlas">
     <div style="flex:1">
-      <div class="note" style="margin-top:4px;font-size:13px;color:#bbb">Every color identity's game plans, ranked — with the 10 cards that define each plan (by lift vs. the identity's baseline) and how much distinctive tech neighboring plans share. Analysis 05's color-pair table, grown into a standalone tool.</div>
+      <div class="note" style="margin-top:4px;font-size:13px;color:#bbb">Every color identity's game plans, ranked, with the 10 cards that define each plan (by lift vs. the identity's baseline) and how much distinctive tech neighboring plans share. Analysis 05's color-pair table, grown into a standalone tool.</div>
     </div>
     <a href="playbook.html">Open the Tome →</a>
   </div>
@@ -338,7 +338,7 @@ function initInspector(){
     document.getElementById('ciFacts').innerHTML=
       `<b style="font-family:var(--disp);font-size:18px">${card}</b><br>`+
       `First printed <b>${d.y||'?'}</b> · identity <b>${d.i||'colorless'}</b> · TCG ~<b>$${d.p||'?'}</b><br>`+
-      "<span style='color:var(--cyan)'>Headline: "+d.t.toLocaleString()+" copies across the sampled meta — its #1 home is "+(d.cm.length?d.cm[0][0]:'?')+".</span><br>"+`In <b>${d.t.toLocaleString()}</b> sampled decks across the top-500 commanders · appears in <b>${d.x.toLocaleString()}</b> known combos${d.x>200?' (combo magnet)':d.x===0?' (fair and square)':''}`;
+      "<span style='color:var(--cyan)'>Headline: "+d.t.toLocaleString()+" copies across the sampled meta; its #1 home is "+(d.cm.length?d.cm[0][0]:'?')+".</span><br>"+`In <b>${d.t.toLocaleString()}</b> sampled decks across the top-500 commanders · appears in <b>${d.x.toLocaleString()}</b> known combos${d.x>200?' (combo magnet)':d.x===0?' (fair and square)':''}`;
     const bars=document.getElementById('ciBars');bars.innerHTML='';
     const mx=Math.max(...d.cm.map(x=>x[1]));
     d.cm.forEach(([cm,n])=>{
@@ -391,11 +391,11 @@ const buckets=Object.keys(DASH.staples).sort((a,b)=>DASH.staples[b].decks-DASH.s
 const WUBRGORD='WUBRG';
 function prettyIdent(b){return b.split('').sort((a,c)=>WUBRGORD.indexOf(a)-WUBRGORD.indexOf(c)).join('')||'Colorless';}
 buckets.forEach(b=>{const o=document.createElement('option');o.value=b;
-  o.textContent=`${prettyIdent(b)} — ${DASH.staples[b].decks.toLocaleString()} decks`;stSel.appendChild(o);});
+  o.textContent=`${prettyIdent(b)} · ${DASH.staples[b].decks.toLocaleString()} decks`;stSel.appendChild(o);});
 function renderStaples(){
   const b=stSel.value,d=DASH.staples[b];
   document.getElementById('stNote').innerHTML=
-   `% of <b>${d.decks.toLocaleString()}</b> sampled decks (commanders of exactly this identity, from the top-500 EDHREC pull) running each card. Basics excluded. Your number, your sample — say both on screen.`;
+   `% of <b>${d.decks.toLocaleString()}</b> sampled decks (commanders of exactly this identity, from the top-500 EDHREC pull) running each card. Basics excluded. Your number, your sample. Say both on screen.`;
   stBars.innerHTML='';
   for(const x of d.top){
     const row=document.createElement('div');row.className='brow';
