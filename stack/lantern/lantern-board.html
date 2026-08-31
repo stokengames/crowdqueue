@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lantern · daily board</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%AE%3C/text%3E%3C/svg%3E">
+<meta property="og:title" content="Lantern · daily board">
+<meta property="og:description" content="Today's expedition scores. 20 moves, one lantern, best 12 cards. What's the score to beat?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://stoken.games/stack/lantern/lantern-board.html">
+<meta property="og:image" content="https://stoken.games/stack/lantern/og-lantern.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#080d12; --panel:#0e161d; --line:#1b2a35; --cyan:#3fd8ea; --cyan-dim:#1b7f8c;
+         --text:#cfe3ea; --mut:#6f8894; --gold:#e8c76a; --warn:#e87a6a; }
+  *{box-sizing:border-box; margin:0}
+  html,body{min-height:100%; background:var(--bg); color:var(--text);
+    font:14px/1.45 "Inter", "Segoe UI", system-ui, sans-serif}
+  h1, #beat .n, .pts{font-family:"Space Grotesk","Segoe UI",system-ui,sans-serif; font-variant-numeric:tabular-nums}
+  body{background:
+    radial-gradient(1100px 480px at 50% -140px, rgba(63,216,234,.07), transparent 70%),
+    var(--bg); padding:26px 14px 60px}
+  .wrap{max-width:560px; margin:0 auto}
+  header{text-align:center; margin-bottom:18px}
+  h1{font-size:26px; font-weight:600; color:var(--cyan); letter-spacing:.05em}
+  h1 small{display:block; font-size:10px; color:var(--mut); letter-spacing:.18em; font-weight:400; margin-top:3px}
+  #beat{margin:16px auto 14px; text-align:center; background:var(--panel); border:1px solid var(--line);
+    border-radius:12px; padding:12px 16px}
+  #beat .n{font-size:34px; font-weight:800; color:#fff; line-height:1.1}
+  #beat .l{font-size:10.5px; text-transform:uppercase; letter-spacing:.12em; color:var(--mut)}
+  #beat .w{font-size:12.5px; color:var(--gold); margin-top:2px}
+  .tabs{display:flex; gap:8px; justify-content:center; margin-bottom:6px}
+  .tabs button{flex:0 0 auto; background:transparent; border:1px solid var(--line); color:var(--mut);
+    padding:9px 18px; border-radius:9px; font-size:13px; font-weight:600; cursor:pointer; touch-action:manipulation}
+  .tabs button.on{border-color:var(--cyan-dim); color:var(--cyan); background:#0d232b}
+  #datenav{display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:12px}
+  #datechip{font-size:11px; color:var(--mut); letter-spacing:.08em; min-width:110px; text-align:center}
+  #datenav button{background:transparent; border:1px solid var(--line); color:var(--mut); width:30px; height:26px;
+    border-radius:7px; cursor:pointer; font-size:10px; line-height:1; touch-action:manipulation}
+  #datenav button:not(:disabled):hover{border-color:var(--cyan-dim); color:var(--cyan)}
+  #datenav button:disabled{opacity:.3; cursor:default}
+  ol{list-style:none; padding:0; background:var(--panel); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+  ol li{display:flex; align-items:center; gap:12px; padding:10px 14px; border-top:1px solid var(--line); font-size:14px}
+  ol li:first-child{border-top:0}
+  .rk{flex:0 0 34px; text-align:right; color:var(--mut); font-weight:600; font-variant-numeric:tabular-nums}
+  .hd{flex:1; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .pts{flex:0 0 auto; color:var(--gold); font-weight:700}
+  .pmark{width:13px; height:13px; border-radius:50%; border:1.5px solid var(--cyan);
+    box-shadow:0 0 8px rgba(63,216,234,.6), inset 0 0 4px rgba(232,199,106,.8);
+    display:inline-block; margin-right:10px; vertical-align:2px}
+  li.top1{background:#151d12}  li.top1 .rk{color:var(--gold)}  li.top1 .pts{color:var(--gold)}
+  li.top2 .rk,li.top3 .rk{color:var(--text)}
+  li.me{outline:1px solid var(--cyan-dim); outline-offset:-1px; background:#0d2029}
+  li.me .hd::after{content:" · you"; color:var(--cyan); font-weight:400; font-size:11.5px}
+  #state{text-align:center; color:var(--mut); padding:26px 10px; font-size:13px}
+  .foot{text-align:center; margin-top:20px}
+  .foot a.play{display:inline-block; background:var(--cyan); color:#03242b; font-weight:700;
+    padding:11px 22px; border-radius:9px; text-decoration:none; font-size:14px}
+  .foot .sub{font-size:11px; color:var(--mut); margin-top:10px}
+  #legal{margin-top:26px; text-align:center; font-size:9px; color:#3c4c55; line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1><span class="pmark"></span>LANTERN<small>DAILY BOARD · A STOKEN.GAMES EXPEDITION</small></h1>
+  </header>
+
+  <div id="beat" style="display:none">
+    <div class="l" id="beatlabel">score to beat</div>
+    <div class="n" id="beatscore">–</div>
+    <div class="w" id="beatwho"></div>
+  </div>
+
+  <div class="tabs">
+    <button id="tab-today" class="on">Today</button>
+    <button id="tab-yest">Yesterday</button>
+  </div>
+  <div id="datenav">
+    <button id="day-prev" title="earlier day">◀</button>
+    <span id="datechip"></span>
+    <button id="day-next" title="later day">▶</button>
+  </div>
+
+  <ol id="rows" style="display:none"></ol>
+  <div id="state">Lighting the lantern…</div>
+
+  <div class="foot">
+    <a class="play" href="lantern.html">Go gathering →</a>
+    <div class="sub">One expedition a day. Best 12 cards score. Board rolls over at midnight ET.</div>
+  </div>
+
+  <div id="legal">Unofficial Fan Content per the WotC Fan Content Policy. Not approved/endorsed by Wizards.<br>
+    Card data &amp; images © Wizards of the Coast, via Scryfall.</div>
+</div>
+
+<script>
+const SB={ url:"https://biuuslsdrmbckasdxduj.supabase.co", anon:"sb_publishable_82hhYcU8944cpW6ZCE44TA_BpIbIO3O" };
+
+/* days in ET, derived from today's ET date (not clock arithmetic — DST-safe).
+   offset 0 = today, 1 = yesterday, n = n days back, floored at launch day. */
+const LAUNCH="2026-08-27";   /* first day with a real score on the board */
+const etToday=new Date().toLocaleDateString("en-CA",{timeZone:"America/New_York"});
+const [Y,M,D]=etToday.split("-").map(Number);
+const dayAt=off=>new Date(Date.UTC(Y,M-1,D-off)).toISOString().slice(0,10);
+const maxOff=(()=>{ let o=0; while(o<3650&&dayAt(o)>LAUNCH) o++; return o; })();
+
+const myHandle=(localStorage.getItem("lantern.handle")||"").toLowerCase();
+let showing=0;
+const el=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[<>&]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
+
+async function load(off){
+  off=Math.max(0,Math.min(maxOff,off)); showing=off;
+  el("tab-today").classList.toggle("on",off===0);
+  el("tab-yest").classList.toggle("on",off===1);
+  el("day-next").disabled=off===0;
+  el("day-prev").disabled=off>=maxOff;
+  const day=dayAt(off);
+  el("datechip").textContent=day+" · ET";
+  el("rows").style.display="none"; el("beat").style.display="none";
+  el("state").style.display="block"; el("state").textContent="Lighting the lantern…";
+  try{
+    const r=await fetch(`${SB.url}/rest/v1/lantern_scores?day=eq.${day}&select=handle,score&order=score.desc,created_at.asc&limit=100`,
+      { headers:{ apikey:SB.anon, Authorization:"Bearer "+SB.anon } });
+    if(!r.ok) throw 0;
+    const rows=await r.json();
+    if(showing!==off) return;                       /* a later click won the race */
+    if(!Array.isArray(rows)||!rows.length){
+      el("state").textContent = off===0
+        ? "No scores yet today. Be the first."
+        : "No scores made it onto the board that day.";
+      return; }
+    el("beatlabel").textContent = off===0 ? "score to beat"
+      : off===1 ? "yesterday's winning score" : "winning score that day";
+    el("beatscore").textContent = rows[0].score;
+    el("beatwho").textContent = (off===0?"set by ":"🏆 ")+rows[0].handle;
+    el("beat").style.display="block";
+    el("rows").innerHTML=rows.map((x,k)=>{
+      const cls=[k===0?"top1":k===1?"top2":k===2?"top3":"",
+                 myHandle&&String(x.handle).toLowerCase()===myHandle?"me":""].filter(Boolean).join(" ");
+      return `<li${cls?` class="${cls}"`:""}><span class="rk">${k+1}</span>`+
+             `<span class="hd">${esc(x.handle)}</span><span class="pts">${(+x.score)|0} pts</span></li>`; }).join("");
+    el("rows").style.display="block"; el("state").style.display="none";
+  }catch(e){ if(showing===off)
+    el("state").textContent="Couldn't reach the board. Check your connection and try again."; } }
+
+el("tab-today").onclick=()=>load(0);
+el("tab-yest").onclick=()=>load(1);
+el("day-prev").onclick=()=>load(showing+1);
+el("day-next").onclick=()=>load(showing-1);
+addEventListener("keydown",e=>{ if(e.key==="ArrowLeft") load(showing+1);
+  else if(e.key==="ArrowRight") load(showing-1); });
+load(0);
+</script>
+</body>
+</html>
